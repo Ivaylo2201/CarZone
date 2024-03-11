@@ -1,0 +1,70 @@
+<div class="form__container">
+    <form class="search__panel">
+        <div class="filter__text">
+            FILTER BY:
+        </div>
+
+        <div class="filter__brand">
+            {% include 'components/label.html' with text='Brand' %}
+            
+            <div class="brand__input">
+                {{ form.brand }}
+            </div>
+        </div>
+
+        <div class="filter__model">
+            {% include 'components/label.html' with text='Model' %}
+            
+            <div class="model__input">
+                {{ form.model }}
+            </div>
+        </div>
+
+        <div class="filter__price">
+            {% include 'components/label.html' with text='Price' %}
+            
+            <div class="price__inputs">
+                {{ form.min_price }}
+                <i class="fa-solid fa-arrow-right"></i>
+                {{ form.max_price }}
+            </div>
+        </div>
+
+        <div class="filter__horsepower">
+            {% include 'components/label.html' with text='Horsepower' %}
+            
+            <div class="horsepower__inputs">
+                {{ form.min_horsepower }}
+                <i class="fa-solid fa-arrow-right"></i>
+                {{ form.max_horsepower }}
+            </div>
+        </div>
+
+        <div class="filter__mileage">
+            {% include 'components/label.html' with text='Mileage' %}
+            
+            <div class="mileage__inputs">
+                {{ form.min_mileage }}
+                <i class="fa-solid fa-arrow-right"></i>
+                {{ form.max_mileage }}
+            </div>
+        </div>
+
+        <div class="filter__capacity">
+            {% include 'components/label.html' with text='Capacity' %}
+            
+            <div class="capacity__inputs">
+                {{ form.min_capacity }}
+                <i class="fa-solid fa-arrow-right"></i>
+                {{ form.max_capacity }}
+            </div>
+        </div>
+
+        <div class="filter__button">
+            <button type="submit">
+                Apply Filter
+                <i class="fa-solid fa-filter"></i>
+            </button>
+        </div>
+    </form>
+</div>

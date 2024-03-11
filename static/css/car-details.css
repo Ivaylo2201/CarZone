@@ -1,0 +1,279 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.car__details__container {
+    width: 60%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.image__swiper__base__details {
+    width: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.car__image__swiper {
+    width: 65%;
+    height: 100%;
+}
+
+.car__base__details {
+    width: 33%;
+    height: 100%;
+    background-color: var(--grey);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    font-family: "Montserrat", sans-serif;
+}
+
+.car__base__details ~ div {
+    width: 100%;
+}
+
+.car__brand__model,
+.car__price {
+    font-size: 28px;
+    color: var(--lightergrey);
+}
+
+.car__brand__model {
+    height: 45px;
+    font-weight: 800;
+}
+
+.car__price {
+    height: 50px;
+}
+
+.car__price p {
+    font-weight: 600;
+}
+
+.car__price__label {
+    width: 145px;
+    height: 100%;
+}
+
+.car__manufacturer,
+.car__dealer {
+    height: 75px;
+    color: var(--lightergrey);
+}
+
+.car__manufacturer img,
+.car__dealer img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.full__name__and__location {
+    width: 155px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.location,
+.full__name {
+    height: 40%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    justify-content: center;
+}
+
+.location i {
+    margin-right: 8px;
+    color: var(--red);
+}
+
+.car__brand__model,
+.car__price,
+.car__price__label,
+.car__manufacturer,
+.car__dealer,
+.manufacturer__name,
+.car__views,
+.car__dealer__phone__number,
+.car__dealer__phone__number div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.car__dealer__phone__number {
+    height: 60px;
+}
+
+.car__dealer__phone__number div {
+    width: 60%;
+    height: 50px;
+    color: var(--lightergrey);
+    font-weight: 500;
+    background-color: var(--red);
+    border-radius: 25px;
+    font-size: 17px;
+    cursor: default;
+}
+
+.car__dealer__phone__number div i {
+    margin-right: 10px;
+}
+
+.manufacturer__name {
+    font-weight: 500;
+    font-size: 22px;
+    margin-left: 10px;
+}
+
+.car__views {
+    height: 50px;
+    width: 100%;
+    color: var(--lightergrey);
+}
+
+.counter {
+    font-weight: 800;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: var(--red);
+}
+
+/* BOTTOM PART */
+
+.car__details__and__features {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+}
+
+.car__details,
+.car__features {
+    height: 100%;
+    background-color: var(--grey);
+    border-radius: 8px;
+}
+
+.car__details {
+    width: 65%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.car__features {
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--lightergrey);
+}
+
+.car__features ul {
+    width: 85%;
+    columns: 2;
+    list-style-type: square;
+    margin-left: 20px;
+}
+
+.car__features ul li {
+    font-size: 14px;
+}
+
+.car__features ul li:not(:last-child) {
+   margin-bottom: 8px;
+}
+
+.car__features ul li::marker {
+    color: var(--red);
+}
+
+/* car__details columns */
+
+.column__second,
+.column__first {
+    width: 45%;
+    height: 100%;
+    display: flex;
+}
+
+.column__second {
+    width: 35%;
+}
+
+
+.column__second .labels,
+.column__first .labels,
+.column__second .values,
+.column__first .values {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.column__second .labels,
+.column__first .labels {
+    width: 50%;
+}
+
+.column__second .values,
+.column__first .values {
+    width: 50%;
+    font-weight: 600;
+}
+
+.labels div,
+.values div {
+    width: 100%;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    color: var(--lightergrey);
+}
+
+.column__second .values div {
+    padding-left: 10px;
+}
+
+/* IMAGE SWIPER */
+
+.swiper-slide img,
+.swiper-slide,
+.swiper {
+    width: 696px;
+    height: 475px;
+}
+
+.swiper-slide img {
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    color: #fff;
+}
+
+.swiper-pagination-bullet {
+    background-color: #fff !important;
+}
+
+.swiper-pagination.swiper-pagination-bullets.swiper-pagination-horizontal {
+    margin-bottom: 4px;
+}

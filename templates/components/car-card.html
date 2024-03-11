@@ -1,0 +1,45 @@
+{% load car_tags %}
+
+<div class="car__card">
+    <div class="car__image__container">
+        <img src="{{ car.images.first.image.url }}"
+             alt="{{ car.get_brand_model }}"
+        />
+    </div>
+    <div class="car__data__container">
+        <div class="car__brand__model">
+            {{ car.get_brand_model }}
+        </div>
+        <div class="car__property__list">
+            <div class="car__manufacture_year">
+                <i class="fa-regular fa-calendar"></i>
+                {{ car.manufacture_year }}
+            </div>
+            <div class="car__mileage">
+                <i class="fa-solid fa-gauge-simple-high"></i>
+                {{ car.mileage | separate_thousands }} km
+            </div>
+            <div class="car__transmission_type">
+                <i class="fa-solid fa-code-branch"></i>
+                {{ car.transmission_type }}
+            </div>
+            <div class="car__fuel__type">
+                <i class="fa-solid fa-gas-pump"></i>
+                {{ car.fuel_type }}
+            </div>
+        </div>
+        <div class="car__price">
+            €{{ car.price | separate_thousands }}
+        </div>
+        <div class="car__category__warranty">
+            Category:
+            <span class="property">
+                            {% if car.mileage > 0 %}Used{% else %}New{% endif %} 
+                        </span>,
+            Warranty: <span class="property">{{ car.warranty }} Months</span>
+        </div>
+        <div class="view__deal__button">
+            <a href="{% url 'car_details' pk=car.pk %}">View Deal</a>
+        </div>
+    </div>
+</div>

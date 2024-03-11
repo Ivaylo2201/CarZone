@@ -1,0 +1,14 @@
+<ul class="features__list">
+    {% for feature_id, feature_name in form.fields.features.queryset.values_list %}
+        <li>
+            <input type="checkbox"
+                   name="feature"
+                   id="id_features_{{ feature_id }}"
+                   value="{{ feature_id }}"
+            >
+            <label for="id_features_{{ feature_id }}">
+                {{ feature_name }}
+            </label>
+        </li>
+    {% endfor %}
+</ul>

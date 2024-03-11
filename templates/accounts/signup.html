@@ -1,0 +1,44 @@
+{% extends 'accounts/abstractform.html' %}
+
+{% block header_text %}
+    SIGN UP
+{% endblock %}
+
+{% block errors %}
+    {% if form.errors %}
+        {% for field, error in form.errors.items %}
+            {{ error }}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block fields %}
+    <div class="username__input">
+        <div class="user__icon">
+            <i class="fa-solid fa-user"></i>
+        </div>
+        {{ form.username }}
+    </div>
+    <div class="password__input">
+        <div class="password__icon">
+            <i class="fa-solid fa-unlock"></i>
+        </div>
+        {{ form.password1 }}
+    </div>
+    <div class="password__input">
+        <div class="password__icon">
+            <i class="fa-solid fa-unlock-keyhole"></i>
+        </div>
+        {{ form.password2 }}
+    </div>
+{% endblock %}
+
+{% block redirect_link %}
+    Already have an account? Login
+    <a href="{% url 'login' %}">here</a>
+{% endblock %}
+
+{% block button %}
+    Sign up
+    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load car_tags %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/catalogue.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include 'components/filter-form.html' %}
+    
+    <div class="content__container">
+        <div class="cars__container">
+            {% for car in object_list %}
+                {% include 'components/car-card.html' %}
+            {% endfor %}
+        </div>
+
+        {% include 'components/catalogue-pagination.html' %}
+    </div>
+{% endblock %}

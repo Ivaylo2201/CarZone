@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load car_tags %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/car-details.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="car__details__container">
+        <div class="image__swiper__base__details">
+            <div class="car__image__swiper">
+                {% include 'components/car-image-swiper.html' %}
+            </div>
+            <div class="car__base__details">
+                {% include 'components/car-base-details.html' %}
+            </div>
+        </div>
+
+        <div class="car__details__and__features">
+            {% include 'components/car-details-and-features.html' %}
+        </div>
+    </div>
+    
+    <script>
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination'
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+            }
+        });
+    </script>
+{% endblock %}

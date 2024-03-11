@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/car-create.css' %}">
+{% endblock %}
+
+{% block content %}
+    <form class="form" action="{% url 'car_create' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="car__create__inputs">
+
+            {% include 'components/car-create-inputs.html' %}
+
+        </div>
+        <div class="car__create__features">
+
+            {% include 'components/car-create-features.html' %}
+
+            <div class="submit__button">
+                <button type="submit">
+                    Create car
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

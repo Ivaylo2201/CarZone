@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --red: #b73c45;
+    --black: #0c0c0c;
+    --darkgrey: #222222;
+    --grey: #151515;
+    --lightgrey: #a2a1a1;
+    --lightergrey: #d5d4d3;
+}
+
+body {
+    background-color: var(--black);
+    display: flex;
+}
+
+.sidebar__container {
+    height: 935px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar {
+    height: 50%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 230px;
+    background-color: var(--grey);
+}
+
+.sidebar a:link,
+.sidebar a:visited,
+.sidebar a:active {
+    color: var(--red)
+}
+
+.sidebar a {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.sidebar div:hover {
+    background-color: var(--lightergrey);
+}
+
+.button__logout,
+.button__posts,
+.button__add__car,
+.button__user,
+.button__catalogue {
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: background-color 0.28s;
+}
+
+.button__user {
+    margin-bottom: 45px;
+}
+
+.button__logout {
+    margin-top: 45px;
+}
+
+.page__content {
+    width: 100%;
+    height: 932px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

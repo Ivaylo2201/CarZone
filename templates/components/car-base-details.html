@@ -1,0 +1,53 @@
+{% load static %}
+{% load car_tags %}
+
+<div class="car__brand__model">
+    {{ car.get_brand_model }}
+</div>
+<div class="car__price">
+    <div class="car__price__label">
+        Listed for
+    </div>
+    <p>€{{ car.price | separate_thousands }}</p>
+</div>
+<div class="car__manufacturer">
+    <div class="manufacturer__logo">
+        {% if car.manufacturer.logo %}
+            <img src="{{ car.manufacturer.logo.url }}" alt="">
+        {% endif %}
+    </div>
+    <div class="manufacturer__name">
+        {% if car.manufacturer.name %}
+            {{ car.manufacturer.name }}
+        {% else %}
+            Unknown manufacturer
+        {% endif %}
+    </div>
+</div>
+<div class="car__dealer">
+    <div class="profile__picture">
+        {% if object.dealer.profile_picture %}
+            <img src="{{ object.dealer.profile_picture.url }}" alt="">
+        {% else %}
+            <img src="{% static 'images/default_profile_picture.png' %}" alt="">
+        {% endif %}
+    </div>
+    <div class="full__name__and__location">
+        <div class="full__name">
+            {{ object.dealer.first_name }} {{ object.dealer.last_name }}
+        </div>
+        <div class="location">
+            <i class="fa-solid fa-location-dot"></i>
+            {{ object.dealer.location }}
+        </div>
+    </div>
+</div>
+<div class="car__dealer__phone__number">
+    <div class="dealer__phone__number">
+        <i class="fa-solid fa-phone-volume"></i>
+        {{ car.dealer.phone_number | separate_digits }}
+    </div>
+</div>
+<div class="car__views">
+    This post has been viewed <span class="counter">{{ car.views }}</span> time(s).
+</div>

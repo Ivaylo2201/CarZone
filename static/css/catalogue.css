@@ -1,0 +1,316 @@
+.form__container {
+    width: 350px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.content__container {
+    width: 1100px;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.cars__container {
+    height: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+    align-items: center;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input {
+    border: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+.search__panel i {
+    color: var(--red);
+}
+
+.search__panel {
+    width: 350px;
+    height: 842px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--grey);
+    font-family: "Montserrat", sans-serif;
+}
+
+.label {
+    width: 100%;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    color: var(--lightergrey);
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--lightergrey);
+    margin-left: 10px;
+}
+
+.filter__capacity,
+.filter__model,
+.filter__brand,
+.filter__horsepower,
+.filter__mileage,
+.filter__price {
+    width: 90%;
+    height: 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.filter__capacity {
+    margin-bottom: 60px;
+}
+
+.model__input,
+.brand__input,
+.capacity__inputs,
+.horsepower__inputs,
+.mileage__inputs,
+.price__inputs {
+    width: 100%;
+    height: 30px;
+    font-size: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.capacity__inputs input,
+.model__input input,
+.brand__input input,
+.horsepower__inputs input,
+.mileage__inputs input,
+.price__inputs input {
+    width: 100px;
+    height: 35px;
+    font-size: 22px;
+    background-color: #292929;
+    color: var(--lightergrey);
+    font-family: "Montserrat", sans-serif;
+}
+
+.model__input input,
+.brand__input input {
+    width: 100%;
+}
+
+.filter__button {
+    width: 90%;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.filter__button button {
+    width: 175px;
+    height: 46px;
+    border-radius: 23px;
+    background-color: var(--red);
+    color: var(--lightergrey);
+    transition: background-color 0.28s;
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+    border: none;
+    cursor: pointer;
+}
+
+.filter__button button:hover {
+    background-color: var(--lightergrey);
+    color: var(--red);
+}
+
+.filter__button button i {
+    margin-left: 5px;
+    color: var(--lightergrey) l
+}
+
+.view__deal__button,
+.car__price,
+.car__property__list,
+.car__brand__model {
+    display: flex;
+    align-items: center;
+}
+
+.car__card {
+    height: 225px;
+    width: 1000px;
+    border-radius: 8px;
+    display: flex;
+    overflow: hidden;
+    background-color: var(--grey);
+    font-family: "Montserrat", sans-serif;
+}
+
+.car__image__container {
+    width: 28%;
+    height: 100%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.car__image__container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.car__data__container {
+    width: 64%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 18px;
+}
+
+.car__brand__model {
+    width: 100%;
+    height: 35px;
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 6px;
+    color: var(--lightergrey)
+}
+
+.car__property__list {
+    width: 100%;
+    height: 22px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--lightgrey);
+    margin-left: 1.94px;
+}
+
+.car__property__list i {
+    margin-right: 4px;
+}
+
+.car__property__list div {
+    margin-right: 20px;
+}
+
+.car__price {
+    width: 100%;
+    height: 16px;
+    font-size: 22px;
+    font-weight: 500;
+    margin-top: 22px;
+    margin-bottom: 10px;
+    color: var(--lightergrey);
+}
+
+.car__category__warranty {
+    font-weight: 400;
+    color: var(--lightgrey);
+    margin-bottom: 22px;
+    margin-left: 1.5px;
+    font-size: 16px;
+}
+
+.property {
+    color: var(--lightergrey);
+    font-weight: 500;
+}
+
+.view__deal__button {
+    width: 100%;
+    height: 44px;
+}
+
+.view__deal__button a {
+    padding: 12px 62px 12px 62px;
+    border-radius: 75px;
+    text-decoration: none;
+    background-color: var(--red);
+    color: var(--lightergrey);
+    transition: background-color 0.28s;
+}
+
+.view__deal__button a:hover {
+    background-color: var(--lightergrey);
+    color: var(--red);
+}
+
+.pagination__container {
+    width: 32%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination__container a {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--grey);
+    color: var(--red);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.buttons__back,
+.buttons__forward {
+    width: 125px;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.current {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    background-color: var(--lightergrey);
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 50%;
+}
+
+.filter__text {
+    margin-bottom: 50px;
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--lightergrey)
+}

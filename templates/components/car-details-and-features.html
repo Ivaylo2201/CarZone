@@ -1,0 +1,47 @@
+{% load car_tags %}
+
+<div class="car__details">
+    <div class="column__first">
+        <div class="labels">
+            <div>Brand & Model</div>
+            <div>Manufacture year</div>
+            <div>Transmission type</div>
+            <div>Horsepower</div>
+            <div>Cubic capacity</div>
+        </div>
+        <div class="values">
+            <div>{{ object.get_brand_model }}</div>
+            <div>{{ object.manufacture_year }}</div>
+            <div>{{ object.transmission_type }}</div>
+            <div>{{ object.horsepower }} hp.</div>
+            <div>{{ object.capacity }} cc.</div>
+        </div>
+    </div>
+    <div class="column__second">
+        <div class="labels">
+            <div>Euro standard</div>
+            <div>Mileage</div>
+            <div>Body type</div>
+            <div>Fuel type</div>
+            <div>Color</div>
+        </div>
+        <div class="values">
+            <div>EU{{ object.euro_standard }}</div>
+            <div>{{ object.mileage | separate_thousands }} km.</div>
+            <div>{{ object.body_type }}</div>
+            <div>{{ object.fuel_type }}</div>
+            <div>{{ object.color }}</div>
+        </div>
+    </div>
+</div>
+<div class="car__features">
+    {% if features %}
+        <ul>
+            {% for feature in features %}
+                <li>{{ feature.name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        No specified features for this vehicle.
+    {% endif %}
+</div>

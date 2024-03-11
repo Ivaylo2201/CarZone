@@ -1,0 +1,38 @@
+{% extends 'accounts/abstractform.html' %}
+
+{% block header_text %}
+    Login
+{% endblock %}
+
+{% block errors %}
+    {% if form.errors %}
+        {% for field, error in form.errors.items %}
+            {{ error }}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block fields %}
+    <div class="username__input">
+        <div class="user__icon">
+            <i class="fa-solid fa-user"></i>
+        </div>
+        {{ form.username }}
+    </div>
+    <div class="password__input">
+        <div class="password__icon">
+            <i class="fa-solid fa-unlock"></i>
+        </div>
+        {{ form.password }}
+    </div>
+{% endblock %}
+
+{% block redirect_link %}
+    Don't have an account? Sign up
+    <a href="{% url 'sign-up' %}">here</a>
+{% endblock %}
+
+{% block button %}
+    Login
+    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+{% endblock %}

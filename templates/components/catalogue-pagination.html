@@ -1,0 +1,39 @@
+<div class="pagination__container">
+    <div class="buttons__back">
+        {% if page_obj.has_previous %}
+            <a href="{{ first_page_url }}" title="First">
+                <i class="fa-solid fa-angles-left"></i>
+            </a>
+            <a href="{{ prev_page_url }}" title="Previous">
+                <i class="fa-solid fa-angle-left"></i>
+            </a>
+        {% else %}
+            <a class="disabled">
+                <i class="fa-solid fa-angles-left"></i>
+            </a>
+            <a class="disabled">
+                <i class="fa-solid fa-angle-left"></i>
+            </a>
+        {% endif %}
+    </div>
+
+    <div class="current">{{ page_obj.number }}</div>
+
+    <div class="buttons__forward">
+        {% if page_obj.has_next %}
+            <a href="{{ next_page_url }}" title="Next">
+                <i class="fa-solid fa-angle-left fa-rotate-180"></i>
+            </a>
+            <a href="{{ last_page_url }}" title="Last">
+                <i class="fa-solid fa-angles-left fa-rotate-180"></i>
+            </a>
+        {% else %}
+            <a class="disabled">
+                <i class="fa-solid fa-angle-left fa-rotate-180"></i>
+            </a>
+            <a class="disabled">
+                <i class="fa-solid fa-angles-left fa-rotate-180"></i>
+            </a>
+        {% endif %}
+    </div>
+</div>
