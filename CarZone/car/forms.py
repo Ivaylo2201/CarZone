@@ -36,6 +36,18 @@ class CarCreateForm(forms.ModelForm):
         model = Car
         exclude = ('views', 'dealer', 'manufacturer', 'features')
 
+        error_messages = {
+            'horsepower': {
+                'max_value': 'Ensure horsepower does not exceed 750!',
+            },
+            'capacity': {
+                'max_value': 'Ensure capacity does not exceed 7500!',
+            },
+            'mileage': {
+                'max_value': 'Ensure mileage does not exceed 750 000!',
+            }
+        }
+
 
 class CarFilterForm(forms.Form):
     brand = forms.CharField(

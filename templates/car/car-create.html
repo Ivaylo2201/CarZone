@@ -12,6 +12,18 @@
 
             {% include 'components/car-create-inputs.html' %}
 
+            <div class="errors">
+                {% if form.errors %}
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <div>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+
         </div>
         <div class="car__create__features">
 

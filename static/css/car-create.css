@@ -7,11 +7,17 @@
     overflow: hidden;
 }
 
+.container {
+    width: 100%;
+    height: 700px;
+    display: flex;
+}
+
 .features__list {
     width: 375px;
     height: 600px;
     columns: 2;
-    margin-left: 70px;
+    margin-left: 55px;
 }
 
 .features__list li {
@@ -44,8 +50,11 @@
 
 .car__create__inputs {
     width: 60%;
-    height: 100%;
+    height: 725px;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .input__column__first,
@@ -56,6 +65,7 @@
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
+    padding-top: 10px;
 }
 
 .input__container {
@@ -68,21 +78,47 @@
 .input__column__second input,
 .input__column__second select {
     width: 100%;
-    height: 30px;
+    height: 35px;
     border: none;
     outline: none;
     background-color: #292929;
     font-family: "Montserrat", sans-serif;
-    font-size: 23px;
+    font-size: 20px;
+    color: var(--lightergrey);
+    padding-left: 5px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+}
+
+select {
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+    height: 35px;
+    border: none;
+    padding: 2px 75px 0 67px;
+    background-color: #292929;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    border-radius: 17px;
     color: var(--lightergrey);
 }
 
-input:focus {
-    outline: none;
+input[type="file"]::file-selector-button,
+input[type="file"] {
+    background-color: var(--red);
+    transition: background-color 0.28s;
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:hover,
+input[type="file"]:hover {
+    background-color: var(--lightergrey);
+    color: var(--red);
 }
 
 .car__create__features {
-    width: 400px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -97,8 +133,8 @@ input:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 70px;
-    margin-top: 25px;
+    margin-left: 55px;
+    margin-top: 10px;
 }
 
 .submit__button button {
@@ -140,4 +176,15 @@ input:focus {
     height: 1px;
     background-color: var(--lightergrey);
     margin-left: 10px;
+}
+
+.errors {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--red);
+    font-family: "Montserrat", sans-serif;
 }

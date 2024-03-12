@@ -1,10 +1,9 @@
-import datetime
-
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth import get_user_model
 
-from .choices import BodyTypes, Colors, TransmissionTypes, FuelTypes, EURO_STANDARD
+from .choices import BODY_TYPES, COLORS, TRANSMISSION_TYPES, FUEL_TYPES, EURO_STANDARD
+from .validators import validate_manufacture_year
 
 UserModel = get_user_model()
 
@@ -27,8 +26,8 @@ class Car(models.Model):
     MODEL_MAX_LENGTH: int = 25
     MANUFACTURE_YEAR_MIN_VALUE: int = 2000
     TRANSMISSION_TYPE_MAX_LENGTH: int = 15
-    POWER_MAX_VALUE: int = 750
-    CUBIC_CAPACITY_MAX_VALUE: int = 5000
+    POWER_MAX_VALUE: int = 1000
+    CUBIC_CAPACITY_MAX_VALUE: int = 7500
     MILEAGE_MAX_VALUE: int = 750_000
     BODY_TYPE_MAX_LENGTH: int = 20
     FUEL_TYPE_MAX_LENGTH: int = 15
@@ -45,13 +44,13 @@ class Car(models.Model):
     manufacture_year = models.PositiveSmallIntegerField(
         validators=(
             MinValueValidator(MANUFACTURE_YEAR_MIN_VALUE),
-            MaxValueValidator(datetime.datetime.now().year)
+            validate_manufacture_year
         )
     )
 
     transmission_type = models.CharField(
         max_length=TRANSMISSION_TYPE_MAX_LENGTH,
-        choices=TransmissionTypes.choices
+        choices=TRANSMISSION_TYPES,
     )
 
     horsepower = models.PositiveSmallIntegerField(
@@ -63,28 +62,26 @@ class Car(models.Model):
     )
 
     euro_standard = models.PositiveSmallIntegerField(
-        null=True, blank=True,
-        choices=EURO_STANDARD
+        choices=EURO_STANDARD,
     )
 
     mileage = models.PositiveIntegerField(
-        default=0,
         validators=(MaxValueValidator(MILEAGE_MAX_VALUE),)
     )
 
     body_type = models.CharField(
         max_length=BODY_TYPE_MAX_LENGTH,
-        choices=BodyTypes.choices
+        choices=BODY_TYPES,
     )
 
     fuel_type = models.CharField(
         max_length=FUEL_TYPE_MAX_LENGTH,
-        choices=FuelTypes.choices
+        choices=FUEL_TYPES,
     )
 
     color = models.CharField(
         max_length=COLOR_MAX_LENGTH,
-        choices=Colors.choices
+        choices=COLORS,
     )
 
     price = models.PositiveIntegerField()
@@ -108,14 +105,12 @@ class Car(models.Model):
     )
 
     features = models.ManyToManyField(to=Feature)
-    warranty = models.PositiveSmallIntegerField(default=0)
+    warranty = models.PositiveSmallIntegerField()
+    is_available = models.BooleanField(default=True, editable=False)
 
     @property
     def get_brand_model(self) -> str:
         return f'{self.brand} {self.model}'
-
-    # def get_images_path(self) -> str:
-    #     return f'cars/car-{self.pk}-images'
 
 
 class CarImage(models.Model):

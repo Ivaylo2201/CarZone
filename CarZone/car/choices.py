@@ -1,37 +1,44 @@
-from django.db import models
+TRANSMISSION_TYPES: tuple = (
+    ('', 'Select transmission type'),
+    ('Automatic', 'Automatic'),
+    ('Manual', 'Manual'),
+)
 
+BODY_TYPES: tuple = (
+    ('', 'Select body type'),
+    ('Sedan', 'Sedan'),
+    ('Coupe', 'Coupe'),
+    ('Wagon', 'Wagon'),
+    ('Hatchback', 'Hatchback'),
+    ('SUV', 'SUV'),
+    ('Limousine', 'Limousine'),
+    ('Pickup', 'Pickup'),
+    ('Van', 'Van'),
+)
 
-class TransmissionTypes(models.TextChoices):
-    AUTOMATIC = 'Automatic', 'Automatic'
-    MANUAL = 'Manual', 'Manual'
+FUEL_TYPES: tuple = (
+    ('', 'Select fuel type'),
+    ('Bensine', 'Bensine'),
+    ('Diesel', 'Diesel'),
+    ('Gas', 'Gas'),
+    ('Electric', 'Electric'),
+    ('Hybrid', 'Hybrid')
+)
 
-
-class BodyTypes(models.TextChoices):
-    SEDAN = 'Sedan', 'Sedan'
-    COUPE = 'Coupe', 'Coupe'
-    WAGON = 'Wagon', 'Wagon'
-    HATCHBACK = 'Hatchback', 'Hatchback'
-
-
-class FuelTypes(models.TextChoices):
-    BENSINE = 'Bensine', 'Bensine'
-    DIESEL = 'Diesel', 'Diesel'
-    GAS = 'Gas', 'Gas'
-    ELECTRIC = 'Electric', 'Electric'
-
-
-class Colors(models.TextChoices):
-    WHITE = 'White', 'White'
-    GREY = 'Grey', 'Grey'
-    BLACK = 'Black', 'Black'
-    RED = 'Red', 'Red'
-    BLUE = 'Blue', 'Blue'
-    YELLOW = 'Yellow', 'Yellow'
-    ORANGE = 'Orange', 'Orange'
-    GREEN = 'Green', 'Green'
-
+COLORS: tuple = (
+    ('', 'Select a color'),
+    ('White', 'White'),
+    ('Grey', 'Grey'),
+    ('Black', 'Black'),
+    ('Red', 'Red'),
+    ('Blue', 'Blue'),
+    ('Yellow', 'Yellow'),
+    ('Orange', 'Orange'),
+    ('Green', 'Green')
+)
 
 EURO_STANDARD: tuple = (
+    ('', 'Select euro standard'),
     (1, 1), (2, 2), (3, 3),
     (4, 4), (5, 5), (6, 6)
 )

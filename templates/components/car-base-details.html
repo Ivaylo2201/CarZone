@@ -1,9 +1,6 @@
 {% load static %}
 {% load car_tags %}
 
-<div class="car__brand__model">
-    {{ car.get_brand_model }}
-</div>
 <div class="car__price">
     <div class="car__price__label">
         Listed for
@@ -25,21 +22,15 @@
     </div>
 </div>
 <div class="car__dealer">
-    <div class="profile__picture">
+    <div class="dealer__profile__picture">
         {% if object.dealer.profile_picture %}
             <img src="{{ object.dealer.profile_picture.url }}" alt="">
         {% else %}
             <img src="{% static 'images/default_profile_picture.png' %}" alt="">
         {% endif %}
     </div>
-    <div class="full__name__and__location">
-        <div class="full__name">
-            {{ object.dealer.first_name }} {{ object.dealer.last_name }}
-        </div>
-        <div class="location">
-            <i class="fa-solid fa-location-dot"></i>
-            {{ object.dealer.location }}
-        </div>
+    <div class="dealer__name">
+        {{ object.dealer.first_name }} {{ object.dealer.last_name }}
     </div>
 </div>
 <div class="car__dealer__phone__number">

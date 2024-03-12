@@ -5,8 +5,8 @@
 }
 
 .car__details__container {
-    width: 60%;
-    height: 75%;
+    width: 70%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     row-gap: 20px;
@@ -78,28 +78,6 @@
     margin-right: 10px;
 }
 
-.full__name__and__location {
-    width: 155px;
-    height: 65px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.location,
-.full__name {
-    height: 40%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    font-weight: 500;
-    justify-content: center;
-}
-
-.location i {
-    margin-right: 8px;
-    color: var(--red);
-}
 
 .car__brand__model,
 .car__price,
@@ -134,6 +112,7 @@
     margin-right: 10px;
 }
 
+.dealer__name,
 .manufacturer__name {
     font-weight: 500;
     font-size: 22px;
@@ -157,7 +136,7 @@
 
 .car__details__and__features {
     width: 100%;
-    height: 100%;
+    height: 400px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -174,7 +153,7 @@
 .car__details {
     width: 65%;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
 }
 
 .car__features {
@@ -189,7 +168,7 @@
     width: 85%;
     columns: 2;
     list-style-type: square;
-    margin-left: 20px;
+    margin-left: 62px;
 }
 
 .car__features ul li {
@@ -197,7 +176,7 @@
 }
 
 .car__features ul li:not(:last-child) {
-   margin-bottom: 8px;
+    margin-bottom: 9px;
 }
 
 .car__features ul li::marker {
@@ -206,49 +185,95 @@
 
 /* car__details columns */
 
-.column__second,
-.column__first {
-    width: 45%;
+
+.car__brand__model__container {
+    width: 100%;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    color: var(--lightergrey);
+    font-size: 36px;
+    font-weight: 800;
+    padding-top: 10px;
+}
+
+.car__details__columns {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.column__first,
+.column__second {
     height: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.column__first {
+    width: 31%;
 }
 
 .column__second {
-    width: 35%;
+    width: 28%;
 }
 
-
-.column__second .labels,
-.column__first .labels,
-.column__second .values,
-.column__first .values {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+/* Labels */
 
 .column__second .labels,
 .column__first .labels {
-    width: 50%;
-}
-
-.column__second .values,
-.column__first .values {
-    width: 50%;
-    font-weight: 600;
-}
-
-.labels div,
-.values div {
-    width: 100%;
-    height: 32px;
-    display: flex;
-    align-items: center;
+    height: 100%;
     color: var(--lightergrey);
 }
 
-.column__second .values div {
-    padding-left: 10px;
+.column__first .labels {
+    width: 75%;
+}
+
+.column__second .labels {
+    width: 54%;
+}
+
+.column__second .labels div,
+.column__first .labels div {
+    width: 100%;
+    height: 47px;
+    display: flex;
+    align-items: center;
+}
+
+/* Values */
+
+.column__first .values,
+.column__second .values {
+    height: 100%;
+    color: var(--lightergrey);
+    font-weight: 700;
+}
+
+.column__first .values {
+    width: 34%;
+}
+
+.column__second .values {
+    width: 60%;
+}
+
+
+.column__second .values div,
+.column__first .values div {
+    width: 100%;
+    height: 47px;
+    display: flex;
+    align-items: center;
+}
+
+.divider {
+    width: 1px;
+    background-color: var(--lightergrey);
+    height: 95%;
 }
 
 /* IMAGE SWIPER */
@@ -256,8 +281,8 @@
 .swiper-slide img,
 .swiper-slide,
 .swiper {
-    width: 696px;
-    height: 475px;
+    width: 810px;
+    height: 491px;
 }
 
 .swiper-slide img {

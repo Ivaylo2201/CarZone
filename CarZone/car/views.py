@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import QuerySet
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from typing import Optional
@@ -16,7 +16,7 @@ def index(request):
 
 
 class CarListView(LoginRequiredMixin, ListView):
-    queryset = Car.objects.all()
+    queryset = Car.objects.filter(is_available=True)
     template_name = 'car/catalogue.html'
     ordering = ['pk']
     paginate_by = 3
@@ -26,7 +26,10 @@ class CarListView(LoginRequiredMixin, ListView):
         context: dict = super().get_context_data(*args, **kwargs)
 
         context['form'] = CarFilterForm(
-            initial={field: self.get_param(field) for field in CarFilterForm.base_fields}
+            initial={
+                field: self.get_param(field)
+                for field in CarFilterForm.base_fields
+            }
         )
 
         page_obj = context['page_obj']
@@ -95,7 +98,7 @@ class CarListView(LoginRequiredMixin, ListView):
 
 
 class CarCreateView(LoginRequiredMixin, CreateView):
-    queryset = Car.objects.all()
+    model = Car
     template_name = 'car/car-create.html'
     form_class = CarCreateForm
     success_url = reverse_lazy('catalogue')
@@ -124,6 +127,10 @@ class CarCreateView(LoginRequiredMixin, CreateView):
             'audi': 'Volkswagen',
             'vw': 'Volkswagen',
             'seat': 'Volkswagen',
+            'mercedes-benz': 'Mercedes-Benz',
+            'brabus': 'Mercedes-Benz',
+            'bmw': 'BMW',
+            'nissan': 'Nissan'
         }
 
         try:
@@ -136,9 +143,19 @@ class CarDetailView(LoginRequiredMixin, DetailView):
     queryset = Car.objects.all()
     template_name = 'car/car-details.html'
 
+    def dispatch(self, request, *args, **kwargs) -> HttpResponseRedirect:
+        """
+            Returns 403 Forbidden if the
+            car is currently unavailable
+        """
+        if not self.get_object().is_available:
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
 
-    def get(self, request, *args, **kwargs):
+
+    def get(self, request, *args, **kwargs) -> HttpResponse:
         car: Car = self.get_object()
+
         car.views += 1
         car.save()
 
@@ -148,10 +165,6 @@ class CarDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs) -> dict:
         context: dict = super().get_context_data(**kwargs)
 
-        context['features'] = (
-            self.get_object()
-            .features
-            .order_by('pk')
-        )
+        context['features'] = self.get_object().features.order_by('pk')
 
         return context
