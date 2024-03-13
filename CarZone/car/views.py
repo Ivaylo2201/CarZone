@@ -3,8 +3,6 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import QuerySet
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-from typing import Optional
 from urllib.parse import urlencode
 
 from .models import Car, CarImage, Manufacturer
@@ -122,7 +120,7 @@ class CarCreateView(LoginRequiredMixin, CreateView):
 
 
     @staticmethod
-    def get_manufacturer(brand: str) -> Optional[Manufacturer]:
+    def get_manufacturer(brand: str) -> Manufacturer or None:
         manufacturers: dict = {
             'audi': 'Volkswagen',
             'vw': 'Volkswagen',

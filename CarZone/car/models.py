@@ -1,6 +1,9 @@
+import uuid
+
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth import get_user_model
+from django.utils.text import slugify
 
 from .choices import BODY_TYPES, COLORS, TRANSMISSION_TYPES, FUEL_TYPES, EURO_STANDARD
 from .validators import validate_manufacture_year

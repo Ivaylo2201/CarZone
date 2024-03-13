@@ -11,17 +11,19 @@
         <div class="car__create__inputs">
 
             {% include 'components/car-create-inputs.html' %}
-
-            <div class="errors">
-                {% if form.errors %}
-                    {% for field, errors in form.errors.items %}
-                        {% for error in errors %}
-                            <div>
-                                {{ error }}
-                            </div>
+        
+            <div class="error__container">
+                <div id="errors" class="errors">
+                    {% if form.errors %}
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <p>
+                                    {{ error }}
+                                </p>
+                            {% endfor %}
                         {% endfor %}
-                    {% endfor %}
-                {% endif %}
+                    {% endif %}
+                </div>
             </div>
 
         </div>
@@ -32,9 +34,13 @@
             <div class="submit__button">
                 <button type="submit">
                     Create car
-                    <i class="fa-solid fa-plus"></i>
                 </button>
             </div>
         </div>
     </form>
+    <script>
+        setTimeout(() => {
+            document.getElementById('errors').innerText = '';
+        }, 3500)
+    </script>
 {% endblock %}

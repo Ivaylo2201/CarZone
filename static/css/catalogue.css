@@ -109,12 +109,13 @@ input:focus {
 .horsepower__inputs input,
 .mileage__inputs input,
 .price__inputs input {
-    width: 100px;
+    width: 115px;
     height: 35px;
     font-size: 22px;
     background-color: #292929;
     color: var(--lightergrey);
     font-family: "Montserrat", sans-serif;
+    -moz-appearance:textfield
 }
 
 .model__input input,
@@ -132,7 +133,7 @@ input:focus {
 }
 
 .filter__button button {
-    width: 175px;
+    width: 190px;
     height: 46px;
     border-radius: 23px;
     background-color: var(--red);
@@ -249,12 +250,20 @@ input:focus {
 }
 
 .view__deal__button a {
-    padding: 12px 62px 12px 62px;
-    border-radius: 75px;
-    text-decoration: none;
+    width: 190px;
+    height: 46px;
+    border-radius: 23px;
     background-color: var(--red);
     color: var(--lightergrey);
     transition: background-color 0.28s;
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
 .view__deal__button a:hover {
