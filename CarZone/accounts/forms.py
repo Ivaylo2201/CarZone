@@ -5,6 +5,16 @@ from django import forms
 UserModel = get_user_model()
 
 
+class CarZoneUserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = UserModel
+        fields = ('first_name', 'last_name', 'location', 'phone_number', 'profile_picture')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['phone_number'].error_messages['unique'] = "Phone number already registered!"
+
+
 class CarZoneUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(CarZoneUserCreationForm, self).__init__(*args, **kwargs)
@@ -12,6 +22,7 @@ class CarZoneUserCreationForm(UserCreationForm):
         self.fields['username'].widget = forms.TextInput(attrs={'placeholder': 'Username'})
         self.fields['password1'].widget = forms.PasswordInput(attrs={'placeholder': 'Password'})
         self.fields['password2'].widget = forms.PasswordInput(attrs={'placeholder': 'Confirm password'})
+
 
     error_messages = {
         'password_too_short': 'Password too short!',
@@ -31,6 +42,7 @@ class CarZoneAuthenticationForm(AuthenticationForm):
         super(CarZoneAuthenticationForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget = forms.TextInput(attrs={'placeholder': 'Username'})
         self.fields['password'].widget = forms.PasswordInput(attrs={'placeholder': 'Password'})
+
 
     error_messages = {
         'invalid_login': 'Invalid credentials!'

@@ -1,15 +1,15 @@
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Sum
 from django.http import HttpResponseRedirect, HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.views import LoginView
 
-from .forms import CarZoneUserCreationForm, CarZoneAuthenticationForm
+from .forms import CarZoneUserCreationForm, CarZoneAuthenticationForm, CarZoneUserUpdateForm
 
-
-def index(request):
-    return HttpResponse('test')
+UserModel = get_user_model()
 
 
 class SignUpUserView(CreateView):
@@ -33,6 +33,44 @@ class SignInUserView(LoginView):
         return reverse('catalogue')
 
 
+class UpdateUserView(LoginRequiredMixin, UpdateView):
+    template_name = 'accounts/profile.html'
+    form_class = CarZoneUserUpdateForm
+    success_url = reverse_lazy('profile')
+
+
+    def get_object(self, queryset=None) -> UserModel:
+        return self.request.user
+
+
+    def get_context_data(self, **kwargs) -> dict:
+        context: dict = super().get_context_data(**kwargs)
+        user: UserModel = self.get_object()
+
+        statistics: dict = (
+            user.posts.aggregate(
+                total_price=Sum('price'),
+                total_views=Sum('views')
+            )
+        )
+
+        context['posts'] = user.posts.count()
+        context['total_price'] = statistics['total_price'] or 0
+        context['total_views'] = statistics['total_views'] or 0
+
+        return context
+
+
 def logout_then_login(request: HttpRequest) -> HttpResponseRedirect:
     logout(request)
     return redirect('login')
+
+
+def deactivate(request: HttpRequest) -> HttpResponseRedirect:
+    request.user.is_active = False
+    request.user.save()
+    return logout_then_login(request)
+
+
+def index(request):
+    return HttpResponse('test')

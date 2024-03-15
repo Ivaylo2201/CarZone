@@ -9,28 +9,11 @@
     <form class="form" action="{% url 'car_create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="car__create__inputs">
-
             {% include 'components/car-create-inputs.html' %}
-        
-            <div class="error__container">
-                <div id="errors" class="errors">
-                    {% if form.errors %}
-                        {% for field, errors in form.errors.items %}
-                            {% for error in errors %}
-                                <p>
-                                    {{ error }}
-                                </p>
-                            {% endfor %}
-                        {% endfor %}
-                    {% endif %}
-                </div>
-            </div>
-
+            {% include 'components/error-logger.html' %}
         </div>
         <div class="car__create__features">
-
             {% include 'components/car-create-features.html' %}
-
             <div class="submit__button">
                 <button type="submit">
                     Create car
@@ -38,9 +21,4 @@
             </div>
         </div>
     </form>
-    <script>
-        setTimeout(() => {
-            document.getElementById('errors').innerText = '';
-        }, 3500)
-    </script>
 {% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load car_tags %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="profile__container">
+        <form class="user__information" action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        
+            <div class="user__profile__picture__container">
+                {% if request.user.profile_picture %}
+                    <img src="{{ request.user.profile_picture.url }}" alt="">
+                {% else %}
+                    <img src="{% static 'images/default_profile_picture.png' %}" alt="">
+                {% endif %}
+            </div>
+        
+            <div class="user__properties">
+                <div class="user__first_name">
+                    {% include 'components/label.html' with text='First&nbsp;name' %}
+                    {{ form.first_name }}
+                </div>
+                <div class="user__last_name">
+                    {% include 'components/label.html' with text='Last&nbsp;name' %}
+                    {{ form.last_name }}
+                </div>
+                <div class="user__location">
+                    {% include 'components/label.html' with text='Location' %}
+                    {{ form.location }}
+                </div>
+                <div class="user__phone_number">
+                    {% include 'components/label.html' with text='Phone&nbsp;number' %}
+                    {{ form.phone_number }}
+                </div>
+                <div class="user__profile__picture">
+                    {% include 'components/label.html' with text='Profile&nbsp;picture' %}
+                    <input type="file" name="profile_picture" accept="image/*" id="id_profile_picture">
+                </div>
+            </div>
+        
+            {% include 'components/error-logger.html' %}
+        
+            <div class="buttons">
+                <button type="submit">Update</button>
+                <a href="{% url 'deactivate-confirm' %}">Deactivate</a>
+            </div>
+        </form>
+        <div class="user__statistics">
+            <div class="statistics">
+                <div class="posts">
+                    <div class="text">Posts</div>
+                    <div class="value">{{ posts }}</div>
+                </div>
+                <div class="total__price">
+                    <div class="text">Total price of your cars</div>
+                    <div class="value">€{{ total_price | separate_thousands }}</div>
+                </div>
+                <div class="total__views">
+                    <div class="text">Total views of your posts</div>
+                    <div class="value">{{ total_views }}</div>
+                </div>
+                <div class="member__since">
+                    <div class="text">Member since</div>
+                    <div class="value">{{ request.user.date_joined | date:"d F Y" }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

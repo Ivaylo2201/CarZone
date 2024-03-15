@@ -88,3 +88,20 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.button {
+    width: 190px;
+    height: 46px;
+    border-radius: 23px;
+    background-color: var(--red);
+    color: var(--lightergrey);
+    transition: background-color 0.28s;
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}

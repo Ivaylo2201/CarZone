@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from .choices import Locations
+from .choices import LOCATIONS
 from .validators import validate_phone_number
 
 
@@ -16,9 +16,14 @@ class CarZoneUser(AbstractUser):
     )
     location = models.CharField(
         max_length=LOCATION_MAX_LENGTH,
-        choices=Locations.choices
+        choices=LOCATIONS,
+        null=True,
+        blank=True
     )
     phone_number = models.CharField(
         max_length=PHONE_NUMBER_MAX_LENGTH,
-        validators=(validate_phone_number,)
+        validators=(validate_phone_number,),
+        unique=True,
+        null=True,
+        blank=True
     )

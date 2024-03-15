@@ -13,7 +13,7 @@
 <div class="sidebar__container">
     <div class="sidebar">
         <div class="button__user" title="{{ request.user.username }}'s profile">
-            <a href="">
+            <a href="{% url 'profile' %}">
                 <i class="fa-solid fa-user"></i>
             </a>
         </div>
@@ -43,5 +43,11 @@
     {% block content %}
     {% endblock %}
 </div>
+<script>
+    const refreshRate = 3500;
+    setTimeout(() => {
+        document.getElementById('errors').innerText = '';
+    }, refreshRate)
+</script>
 </body>
 </html>
