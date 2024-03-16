@@ -1,3 +1,18 @@
+COUNTRIES: tuple = (
+    ('England', 'England'),
+    ('Germany', 'Germany'),
+    ('France', 'France'),
+    ('Spain', 'Spain'),
+    ('Italy', 'Italy'),
+    ('Sweden', 'Sweden'),
+    ('Denmark', 'Denmark'),
+    ('Czechia', 'Czechia'),
+    ('Austria', 'Austria'),
+    ('China', 'China'),
+    ('South Korea', 'South Korea'),
+    ('Japan', 'Japan')
+)
+
 TRANSMISSION_TYPES: tuple = (
     ('', '-----'),
     ('Automatic', 'Automatic'),

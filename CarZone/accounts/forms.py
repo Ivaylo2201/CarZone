@@ -8,7 +8,7 @@ UserModel = get_user_model()
 class CarZoneUserUpdateForm(forms.ModelForm):
     class Meta:
         model = UserModel
-        fields = ('first_name', 'last_name', 'location', 'phone_number', 'profile_picture')
+        fields = ('first_name', 'last_name', 'location', 'email', 'phone_number', 'profile_picture')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -8,13 +8,17 @@
 
 {% block content %}
     {% include 'components/filter-form.html' %}
-    
+
     <div class="content__container">
-        <div class="cars__container">
-            {% for car in object_list %}
-                {% include 'components/car-card.html' %}
-            {% endfor %}
-        </div>
+        {% if object_list %}
+            <div class="cars__container">
+                {% for car in object_list %}
+                    {% include 'components/car-card.html' %}
+                {% endfor %}
+            </div>
+        {% else %}
+            {% include 'components/no-cars.html' %}
+        {% endif %}
 
         {% include 'components/catalogue-pagination.html' %}
     </div>

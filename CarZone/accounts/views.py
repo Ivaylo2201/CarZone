@@ -4,12 +4,21 @@ from django.db.models import Sum
 from django.http import HttpResponseRedirect, HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, TemplateView
 from django.contrib.auth.views import LoginView
 
 from .forms import CarZoneUserCreationForm, CarZoneAuthenticationForm, CarZoneUserUpdateForm
 
 UserModel = get_user_model()
+
+
+def initial(request: HttpRequest) -> HttpResponseRedirect:
+    print(f'Currently logged: {request.user.username}')
+    return logout_then_login(request)
+
+
+class DeactivationConfirmTemplateView(TemplateView):
+    template_name = 'accounts/deactivation-confirm.html'
 
 
 class SignUpUserView(CreateView):
@@ -62,6 +71,7 @@ class UpdateUserView(LoginRequiredMixin, UpdateView):
 
 
 def logout_then_login(request: HttpRequest) -> HttpResponseRedirect:
+    print(f'Logging out {request.user.username}...')
     logout(request)
     return redirect('login')
 

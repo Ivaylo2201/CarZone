@@ -47,8 +47,10 @@ class CarListView(LoginRequiredMixin, ListView):
 
     def filter(self, queryset: QuerySet) -> QuerySet:
         lookups: list = [
-            'brand__icontains', 'model__icontains', 'price__gte', 'price__lte',
-            'horsepower__gte', 'horsepower__lte', 'mileage__gte', 'mileage__lte',
+            'brand__icontains', 'model__icontains',
+            'price__gte', 'price__lte',
+            'horsepower__gte', 'horsepower__lte',
+            'mileage__gte', 'mileage__lte',
             'capacity__gte', 'capacity__lte'
         ]
 
@@ -140,6 +142,7 @@ class CarCreateView(LoginRequiredMixin, CreateView):
 class CarDetailView(LoginRequiredMixin, DetailView):
     queryset = Car.objects.all()
     template_name = 'car/car-details.html'
+
 
     def dispatch(self, request, *args, **kwargs) -> HttpResponseRedirect:
         """

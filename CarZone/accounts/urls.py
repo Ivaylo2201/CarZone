@@ -1,10 +1,10 @@
 from django.urls import path, include
-from django.views.generic import RedirectView, TemplateView
 
-from .views import SignUpUserView, SignInUserView, logout_then_login, index, UpdateUserView, deactivate
+from .views import index, logout_then_login, deactivate, initial
+from .views import SignUpUserView, SignInUserView, UpdateUserView, DeactivationConfirmTemplateView
 
 urlpatterns: tuple = (
-    path('', RedirectView.as_view(pattern_name='login')),
+    path('', initial),
     path('accounts/', include(
         [
             path('login/', SignInUserView.as_view(), name='login'),
@@ -14,11 +14,7 @@ urlpatterns: tuple = (
             path('posts/', index, name='user_posts'),
             path('deactivate/', include(
                 [
-                    path(
-                        'confirm/',
-                        TemplateView.as_view(template_name='accounts/deactivation-confirm.html'),
-                        name='deactivate-confirm'
-                    ),
+                    path('confirm/', DeactivationConfirmTemplateView.as_view(), name='deactivate-confirm'),
                     path('', deactivate, name='deactivate-account')
                 ]
             )),

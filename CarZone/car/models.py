@@ -1,11 +1,8 @@
-import uuid
-
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth import get_user_model
-from django.utils.text import slugify
 
-from .choices import BODY_TYPES, COLORS, TRANSMISSION_TYPES, FUEL_TYPES, EURO_STANDARD
+from .choices import BODY_TYPES, COLORS, TRANSMISSION_TYPES, FUEL_TYPES, EURO_STANDARD, COUNTRIES
 from .validators import validate_manufacture_year
 
 UserModel = get_user_model()
@@ -13,9 +10,15 @@ UserModel = get_user_model()
 
 class Manufacturer(models.Model):
     NAME_MAX_LENGTH: int = 50
+    NATIONALITY_MAX_LENGTH: int = 50
 
     name = models.CharField(max_length=NAME_MAX_LENGTH)
+    country = models.CharField(max_length=NATIONALITY_MAX_LENGTH, choices=COUNTRIES, null=True, blank=True)
     logo = models.ImageField(upload_to='manufacturers/')
+
+
+    def __str__(self) -> str:
+        return f'{self.name} ({self.country if self.country else "?"})'
 
 
 class Feature(models.Model):
@@ -110,6 +113,11 @@ class Car(models.Model):
     features = models.ManyToManyField(to=Feature)
     warranty = models.PositiveSmallIntegerField()
     is_available = models.BooleanField(default=True, editable=False)
+
+
+    def __str__(self) -> str:
+        return self.get_brand_model
+
 
     @property
     def get_brand_model(self) -> str:

@@ -4,50 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'images/icon.png' %}">
     <script src="https://kit.fontawesome.com/b53851d4fb.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    {% block extrastyle %}{% endblock %}
+    {% block extrastyle %}
+    {% endblock %}
     <title>CarZone</title>
 </head>
 <body>
 <div class="sidebar__container">
-    <div class="sidebar">
-        <div class="button__user" title="{{ request.user.username }}'s profile">
-            <a href="{% url 'profile' %}">
-                <i class="fa-solid fa-user"></i>
-            </a>
-        </div>
-        <div class="button__catalogue">
-            <a href="{% url 'catalogue' %}" title="Catalogue">
-                <i class="fa-solid fa-layer-group"></i>
-            </a>
-        </div>
-        <div class="button__add__car">
-            <a href="{% url 'car_create' %}" title="Add a car">
-                <i class="fa-solid fa-plus"></i>
-            </a>
-        </div>
-        <div class="button__posts" title="Your posts">
-            <a href="">
-                <i class="fa-solid fa-car"></i>
-            </a>
-        </div>
-        <div class="button__logout" title="Logout">
-            <a href="{% url 'logout' %}">
-                <i class="fa-solid fa-right-from-bracket fa-flip-horizontal"></i>
-            </a>
-        </div>
-    </div>
+    {% include 'components/sidebar.html' %}
 </div>
 <div class="page__content">
     {% block content %}
     {% endblock %}
 </div>
-<script>
-    const refreshRate = 3500;
-    setTimeout(() => {
-        document.getElementById('errors').innerText = '';
-    }, refreshRate)
-</script>
+<script src="{% static 'js/clear_kwargs.js' %}"></script>
+<script src="{% static 'js/hide_errors.js' %}"></script>
 </body>
 </html>
