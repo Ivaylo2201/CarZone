@@ -1,11 +1,17 @@
 {% load static %}
 {% load car_tags %}
 
-<div class="car__price">
-    <div class="car__price__label">
-        Listed for
+<div class="car__price__container">
+    <div class="car__price">Listed for
+        <span style="font-weight: 800; margin-left: 8px">
+            €{{ car.price | separate_thousands }}
+        </span>
     </div>
-    <p>€{{ car.price | separate_thousands }}</p>
+    <div class="car__posted__on">on
+        <span style="color: var(--red); font-weight: 800; margin-left: 8px;">
+            {{ car.posted_on | date:"d F Y" }}
+        </span>
+    </div>
 </div>
 <div class="car__manufacturer">
     <div class="manufacturer__logo">

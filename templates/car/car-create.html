@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <form class="form" action="{% url 'car_create' %}" method="post" enctype="multipart/form-data">
+    <form class="form" action="{% url 'car-create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="car__create__inputs">
             {% include 'components/car-create-inputs.html' %}

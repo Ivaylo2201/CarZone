@@ -113,6 +113,7 @@ class Car(models.Model):
     features = models.ManyToManyField(to=Feature)
     warranty = models.PositiveSmallIntegerField()
     is_available = models.BooleanField(default=True, editable=False)
+    posted_on = models.DateField(auto_now_add=True)
 
 
     def __str__(self) -> str:

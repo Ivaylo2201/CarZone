@@ -1,7 +1,7 @@
 from django.contrib.auth import login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
-from django.http import HttpResponseRedirect, HttpRequest, HttpResponse
+from django.http import HttpResponseRedirect, HttpRequest
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, TemplateView
@@ -54,17 +54,17 @@ class UpdateUserView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs) -> dict:
         context: dict = super().get_context_data(**kwargs)
-        user: UserModel = self.get_object()
+        posts = self.get_object().posts.filter(is_available=True)
 
         statistics: dict = (
-            user.posts.aggregate(
+            posts.aggregate(
                 total_price=Sum('price'),
                 total_views=Sum('views')
             )
         )
 
-        context['posts'] = user.posts.count()
-        context['total_price'] = statistics['total_price'] or 0
+        context['posts'] = posts.count()
+        context['total_price'] = statistics.get('total_price', 0)
         context['total_views'] = statistics['total_views'] or 0
 
         return context
@@ -77,10 +77,7 @@ def logout_then_login(request: HttpRequest) -> HttpResponseRedirect:
 
 
 def deactivate(request: HttpRequest) -> HttpResponseRedirect:
+    print(f"Deactivating {request.user.username}'s account...")
     request.user.is_active = False
     request.user.save()
     return logout_then_login(request)
-
-
-def index(request):
-    return HttpResponse('test')

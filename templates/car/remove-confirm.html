@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/remove-confirm.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="warning__container">
+        <div class="warning__text">
+            <div class="primary">
+                WARNING!
+            </div>
+            <div class="secondary">
+                You are about to remove <span>{{ brand }} {{ model }}</span>
+            </div>
+        </div>
+        <div class="buttons">
+            <a href="{{ request.META.HTTP_REFERER }}">Go back</a>
+            <a href="{% url 'car-remove' pk=pk %}" title="Remove">Remove</a>
+        </div>
+    </div>
+{% endblock %}

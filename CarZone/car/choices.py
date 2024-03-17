@@ -50,7 +50,10 @@ COLORS: tuple = (
     ('Blue', 'Blue'),
     ('Yellow', 'Yellow'),
     ('Orange', 'Orange'),
-    ('Green', 'Green')
+    ('Green', 'Green'),
+    ('Pink', 'Pink'),
+    ('Purple', 'Purple'),
+    ('Brown', 'Brown')
 )
 
 EURO_STANDARD: tuple = (

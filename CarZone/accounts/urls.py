@@ -1,7 +1,8 @@
 from django.urls import path, include
 
-from .views import index, logout_then_login, deactivate, initial
+from .views import logout_then_login, deactivate, initial
 from .views import SignUpUserView, SignInUserView, UpdateUserView, DeactivationConfirmTemplateView
+from ..car.views import ListUserCarView
 
 urlpatterns: tuple = (
     path('', initial),
@@ -11,7 +12,7 @@ urlpatterns: tuple = (
             path('sign-up/', SignUpUserView.as_view(), name='sign-up'),
             path('logout/', logout_then_login, name='logout'),
             path('profile/', UpdateUserView.as_view(), name='profile'),
-            path('posts/', index, name='user_posts'),
+            path('posts/', ListUserCarView.as_view(), name='user-posts'),
             path('deactivate/', include(
                 [
                     path('confirm/', DeactivationConfirmTemplateView.as_view(), name='deactivate-confirm'),

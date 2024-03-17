@@ -1,6 +1,7 @@
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
-from django.db.models import QuerySet
+from django.db.models import QuerySet, Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from urllib.parse import urlencode
@@ -11,6 +12,26 @@ from .forms import CarFilterForm, CarCreateForm
 
 def index(request):
     return HttpResponse('PLACEHOLDER VIEW! CHANGE IN URLS.PY!')
+
+
+def remove(request, pk: int) -> HttpResponseRedirect:
+    car: Car = Car.objects.get(pk=pk)
+    car.is_available = False
+    car.save()
+
+    return redirect('user-posts')
+
+
+def car_remove_confirm(request, pk: int) -> HttpResponseRedirect:
+    car: Car = Car.objects.get(pk=pk)
+
+    context: dict = {
+        'pk': pk,
+        'brand': car.brand,
+        'model': car.model,
+    }
+
+    return render(request, template_name='car/remove-confirm.html', context=context)
 
 
 class CarListView(LoginRequiredMixin, ListView):
@@ -95,6 +116,16 @@ class CarListView(LoginRequiredMixin, ListView):
         urls.append(f'{base_url}?{urlencode(page_params)}')
 
         return urls
+
+
+class ListUserCarView(LoginRequiredMixin, ListView):
+    template_name = 'accounts/your-posts.html'
+    paginate_by = 6
+
+
+    def get_queryset(self) -> QuerySet:
+        criteria = Q(dealer=self.request.user) & Q(is_available=True)
+        return Car.objects.filter(criteria).order_by('pk')
 
 
 class CarCreateView(LoginRequiredMixin, CreateView):

@@ -40,7 +40,7 @@
 }
 
 .car__brand__model,
-.car__price {
+.car__price__container {
     font-size: 28px;
     color: var(--lightergrey);
 }
@@ -50,15 +50,29 @@
     font-weight: 800;
 }
 
-.car__price {
-    height: 50px;
+.car__price__container {
+    height: 65px;
+    flex-direction: column;
 }
 
-.car__price p {
+.car__price,
+.car__posted__on {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.car__posted__on {
+    font-size: 20px;
+}
+
+.car__price__container p {
     font-weight: 600;
 }
 
-.car__price__label {
+.car__price__container__label {
     width: 145px;
     height: 100%;
 }
@@ -80,8 +94,8 @@
 
 
 .car__brand__model,
-.car__price,
-.car__price__label,
+.car__price__container,
+.car__price__container__label,
 .car__manufacturer,
 .car__dealer,
 .manufacturer__name,

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/your-posts.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="cars__container">
+        <div class="previous">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" title="Previous page">
+                    <i class="fa-solid fa-angle-left"></i>
+                </a>
+            {% else %}
+                <a class="disabled">
+                    <i class="fa-solid fa-angle-left"></i>
+                </a>
+            {% endif %}
+        </div>
+
+        <div class="cars">
+            {% if object_list %}
+                {% for car in object_list %}
+                    {% include 'components/car-small-card.html' %}
+                {% endfor %}
+            {% else %}
+                {% include 'components/no-posts.html' %}
+            {% endif %}
+        </div>
+
+        <div class="next">
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" title="Next page">
+                    <i class="fa-solid fa-angle-left fa-rotate-180"></i>
+                </a>
+            {% else %}
+                <a class="disabled">
+                    <i class="fa-solid fa-angle-left fa-rotate-180"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

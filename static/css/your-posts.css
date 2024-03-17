@@ -1,0 +1,180 @@
+.buttons__edit__delete div,
+.buttons__edit__delete a,
+.car__posted_on,
+.car__model,
+.car__brand,
+.no__posts div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.previous,
+.next {
+    width: 150px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.next a,
+.previous a {
+    width: 55px;
+    height: 55px;
+    background-color: var(--lightergrey);
+    color: var(--grey);
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.cars {
+    width: calc(100% - 150px);
+    height: 100%;
+    flex-wrap: wrap;
+    column-gap: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cars__container {
+    width: 75%;
+    height: 88%;
+    background-color: var(--grey);
+    border-radius: 8px;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.no__posts {
+    width: 75%;
+    height: 100px;
+    color: var(--lightergrey);
+    display: flex;
+    flex-direction: column;
+}
+
+.no__posts div {
+    width: 100%;
+    height: 50%;
+}
+
+.text {
+    font-size: 55px;
+}
+
+.create__car__link {
+    font-size: 25px;
+}
+
+.create__car__link a {
+    margin-left: 6px;
+    margin-right: 6px;
+    color: var(--red);
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.car__card {
+    width: 300px;
+    height: 375px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--black);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.car__image {
+    width: 100%;
+    height: 175px;
+    overflow: hidden;
+}
+
+.car__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: scale 0.6s;
+}
+
+.car__image img:hover {
+    scale: 1.1;
+}
+
+.car__brand,
+.car__model {
+    width: 100%;
+    color: var(--lightergrey);
+}
+
+.car__brand {
+    font-size: 32px;
+    font-weight: 700;
+    height: 50px;
+}
+
+.car__model {
+    font-size: 16px;
+    height: 18px;
+    margin-bottom: 5px;
+}
+
+.car__posted_on {
+    font-size: 16px;
+    width: 100%;
+    height: 30px;
+    color: var(--red);
+    font-weight: 800;
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 10px;
+}
+
+.buttons__edit__delete {
+    width: 75%;
+    height: 75px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.buttons__edit__delete a {
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+    background-color: var(--red);
+    border-radius: inherit;
+    transition: background-color 0.28s;
+}
+
+.buttons__edit__delete a:link,
+.buttons__edit__delete a:visited,
+.buttons__edit__delete a:active {
+    color: var(--lightergrey);
+}
+
+.buttons__edit__delete a:hover {
+    background-color: var(--lightergrey);
+    color: var(--red);
+}
+
+.buttons__edit__delete div {
+    width: 55px;
+    height: 55px;
+    font-size: 20px;
+    border-radius: 50%;
+    transition: background-color 0.28s;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 50%;
+}

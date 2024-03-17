@@ -1,0 +1,70 @@
+.buttons,
+.buttons a,
+.secondary,
+.primary,
+.warning__text,
+.warning__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.warning__container {
+    width: 75%;
+    height: 300px;
+    flex-direction: column;
+    font-family: "Montserrat", sans-serif;
+}
+
+.warning__text {
+    width: 100%;
+    height: 60%;
+    font-size: 50px;
+    flex-direction: column;
+    color: var(--lightergrey);
+
+}
+
+.primary {
+    width: 100%;
+    height: 60%;
+    color: var(--red);
+    font-weight: 800;
+    font-size: 90px;
+}
+
+.secondary {
+    width: 100%;
+    height: 40%;
+}
+
+.secondary span {
+    margin-left: 10px;
+    color: var(--red);
+    font-weight: 800;
+}
+
+.buttons {
+    width: 100%;
+    height: 40%;
+}
+
+.buttons a {
+    width: 165px;
+    height: 46px;
+    border-radius: 23px;
+    background-color: var(--red);
+    color: var(--lightergrey);
+    transition: background-color 0.28s;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.buttons a:hover {
+    background-color: var(--lightergrey);
+    color: var(--red);
+}

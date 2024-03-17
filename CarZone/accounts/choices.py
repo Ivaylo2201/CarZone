@@ -7,6 +7,7 @@ LOCATIONS: list[tuple] = [
     ('Ruse', 'Ruse'),
     ('Sliven', 'Sliven'),
     ('Veliko Tarnovo', 'Veliko Tarnovo'),
+    ('Stara Zagora', 'Stara Zagora'),
     ('Pleven', 'Pleven'),
     ('Razgrad', 'Razgrad'),
     ('Targovishte', 'Targovishte'),
