@@ -61,3 +61,13 @@ EURO_STANDARD: tuple = (
     (1, 1), (2, 2), (3, 3),
     (4, 4), (5, 5), (6, 6)
 )
+
+ORDERING: tuple = (
+    ('', '-----'),
+    ('price', 'Price (Asc)'),
+    ('-price', 'Price (Desc)'),
+    ('mileage', 'Mileage (Asc)'),
+    ('-mileage', 'Mileage (Desc)'),
+    ('horsepower', 'Horsepower (Asc)'),
+    ('-horsepower', 'Horsepower (Desc)'),
+)

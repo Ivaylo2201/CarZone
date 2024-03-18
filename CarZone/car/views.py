@@ -16,6 +16,7 @@ def index(request):
 
 def remove(request, pk: int) -> HttpResponseRedirect:
     car: Car = Car.objects.get(pk=pk)
+
     car.is_available = False
     car.save()
 
@@ -63,7 +64,10 @@ class CarListView(LoginRequiredMixin, ListView):
 
 
     def get_queryset(self) -> QuerySet:
-        return self.filter(super().get_queryset())
+        filtered_queryset: QuerySet = self.filter(super().get_queryset())
+        ordering: str = self.request.GET.get('order_by', None)
+
+        return filtered_queryset.order_by(ordering) if ordering else filtered_queryset
 
 
     def filter(self, queryset: QuerySet) -> QuerySet:
@@ -141,33 +145,49 @@ class CarCreateView(LoginRequiredMixin, CreateView):
 
         form.instance.save()
 
-        for feature in self.request.POST.getlist('feature'):
-            form.instance.features.add(int(feature))
-
-        for image in self.request.FILES.getlist('images'):
-            image = CarImage(image=image, car_id=form.instance.pk)
-            image.save()
-            form.instance.images.add(image)
+        self.add_features(form.instance, self.request.POST.getlist('feature'))
+        self.add_images(form.instance, self.request.FILES.getlist('images'))
 
         return super().form_valid(form)
 
 
     @staticmethod
-    def get_manufacturer(brand: str) -> Manufacturer or None:
+    def get_manufacturer(brand: str) -> Manufacturer | None:
         manufacturers: dict = {
             'audi': 'Volkswagen',
             'vw': 'Volkswagen',
             'seat': 'Volkswagen',
-            'mercedes-benz': 'Mercedes-Benz',
-            'brabus': 'Mercedes-Benz',
+            'lamborghini': 'Volkswagen',
+            'porsche': 'Volkswagen',
+            'toyota': 'Toyota',
+            'fiat': 'Fiat',
             'bmw': 'BMW',
-            'nissan': 'Nissan'
+            'mercedes-benz': 'Mercedes-Benz',
+            'nissan': 'Nissan',
+            'hyundai': 'Hyundai',
+            'kia': 'Hyundai',
+            'volvo': 'Volvo',
+            'mazda': 'Mazda',
+            'renault': 'Renault',
+            'peugeot': 'Peugeot',
+            'citroen': 'Citroen'
         }
 
         try:
-            return Manufacturer.objects.get(name=manufacturers[brand])
+            return Manufacturer.objects.get(name__iexact=manufacturers[brand])
         except (Manufacturer.DoesNotExist, KeyError):
             return None
+
+
+    @staticmethod
+    def add_features(instance: Car, features: list) -> None:
+        instance.features.add(*features)
+
+
+    @staticmethod
+    def add_images(instance: Car, images: list) -> None:
+        images_to_create = [CarImage(image=image, car_id=instance.pk) for image in images]
+        CarImage.objects.bulk_create(images_to_create)
 
 
 class CarDetailView(LoginRequiredMixin, DetailView):
@@ -176,10 +196,6 @@ class CarDetailView(LoginRequiredMixin, DetailView):
 
 
     def dispatch(self, request, *args, **kwargs) -> HttpResponseRedirect:
-        """
-            Returns 403 Forbidden if the
-            car is currently unavailable
-        """
         if not self.get_object().is_available:
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
@@ -196,7 +212,9 @@ class CarDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs) -> dict:
         context: dict = super().get_context_data(**kwargs)
+        car: Car = self.get_object()
 
-        context['features'] = self.get_object().features.order_by('pk')
+        context['features'] = car.features.order_by('pk')
+        context['car_images'] = car.images.order_by('pk')
 
         return context

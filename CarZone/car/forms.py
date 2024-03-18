@@ -1,6 +1,7 @@
 from django import forms
 
 from .models import Car, Feature
+from .choices import ORDERING
 
 
 class MultipleFileInput(forms.ClearableFileInput):
@@ -50,53 +51,14 @@ class CarCreateForm(forms.ModelForm):
 
 
 class CarFilterForm(forms.Form):
-    brand = forms.CharField(
-        required=False,
-        max_length=Car.BRAND_MAX_LENGTH,
-        widget=forms.TextInput(attrs={'name': 'brand'})
-    )
-    model = forms.CharField(
-        required=False,
-        max_length=Car.MODEL_MAX_LENGTH,
-        widget=forms.TextInput(attrs={'name': 'model'})
-    )
-    min_price = forms.IntegerField(
-        required=False,
-        min_value=0,
-        widget=forms.NumberInput(attrs={'name': 'minPrice'})
-    )
-    max_price = forms.IntegerField(
-        required=False,
-        min_value=0,
-        widget=forms.NumberInput(attrs={'name': 'maxPrice'})
-    )
-    min_horsepower = forms.IntegerField(
-        required=False,
-        min_value=0,
-        widget=forms.NumberInput(attrs={'name': 'minHorsepower'})
-    )
-    max_horsepower = forms.IntegerField(
-        required=False,
-        min_value=0,
-        widget=forms.NumberInput(attrs={'name': 'maxHorsepower'})
-    )
-    min_mileage = forms.IntegerField(
-        required=False,
-        min_value=0,
-        widget=forms.NumberInput(attrs={'name': 'minMileage'})
-    )
-    max_mileage = forms.IntegerField(
-        required=False,
-        min_value=0,
-        widget=forms.NumberInput(attrs={'name': 'maxMileage'})
-    )
-    min_capacity = forms.IntegerField(
-        required=False,
-        min_value=0,
-        widget=forms.NumberInput(attrs={'name': 'minCapacity'})
-    )
-    max_capacity = forms.IntegerField(
-        required=False,
-        min_value=0,
-        widget=forms.NumberInput(attrs={'name': 'maxCapacity'})
-    )
+    brand = forms.CharField(required=False, max_length=Car.BRAND_MAX_LENGTH)
+    model = forms.CharField(required=False, max_length=Car.MODEL_MAX_LENGTH)
+    min_price = forms.IntegerField(required=False, min_value=0)
+    max_price = forms.IntegerField(required=False, min_value=0)
+    min_horsepower = forms.IntegerField(required=False, min_value=0)
+    max_horsepower = forms.IntegerField(required=False, min_value=0)
+    min_mileage = forms.IntegerField(required=False, min_value=0)
+    max_mileage = forms.IntegerField(required=False, min_value=0)
+    min_capacity = forms.IntegerField(required=False, min_value=0)
+    max_capacity = forms.IntegerField(required=False, min_value=0)
+    order_by = forms.ChoiceField(required=False, choices=ORDERING)

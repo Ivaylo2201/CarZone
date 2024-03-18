@@ -1,6 +1,6 @@
-const isEmpty = kwargs => !kwargs.keys().next().done;
+const isEmpty = (kwargs) => !kwargs.keys().next().done;
 
-document.getElementById('filter-form').addEventListener("submit", () => {
+document.getElementById('filter-form').addEventListener('submit', () => {
     event.preventDefault();
 
     const data = new FormData(event.target);
@@ -14,5 +14,7 @@ document.getElementById('filter-form').addEventListener("submit", () => {
         }
     }
 
-    window.location.href = isEmpty(cleanedKwargs) ? url + '?' + cleanedKwargs.toString() : url;
-})
+    window.location.href = isEmpty(cleanedKwargs)
+        ? url + '?' + cleanedKwargs.toString()
+        : url;
+});

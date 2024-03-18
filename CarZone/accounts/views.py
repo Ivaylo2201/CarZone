@@ -13,7 +13,6 @@ UserModel = get_user_model()
 
 
 def initial(request: HttpRequest) -> HttpResponseRedirect:
-    print(f'Currently logged: {request.user.username}')
     return logout_then_login(request)
 
 
@@ -64,20 +63,20 @@ class UpdateUserView(LoginRequiredMixin, UpdateView):
         )
 
         context['posts'] = posts.count()
-        context['total_price'] = statistics.get('total_price', 0)
+        context['total_price'] = statistics['total_price'] or 0
         context['total_views'] = statistics['total_views'] or 0
 
         return context
 
 
 def logout_then_login(request: HttpRequest) -> HttpResponseRedirect:
-    print(f'Logging out {request.user.username}...')
     logout(request)
+
     return redirect('login')
 
 
 def deactivate(request: HttpRequest) -> HttpResponseRedirect:
-    print(f"Deactivating {request.user.username}'s account...")
     request.user.is_active = False
     request.user.save()
+
     return logout_then_login(request)

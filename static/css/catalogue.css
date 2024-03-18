@@ -66,10 +66,12 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
+select,
 input {
     border: none;
 }
 
+select,
 input:focus {
     outline: none;
 }
@@ -107,6 +109,7 @@ input:focus {
     margin-left: 10px;
 }
 
+.ordering,
 .filter__capacity,
 .filter__model,
 .filter__brand,
@@ -122,10 +125,7 @@ input:focus {
     margin-bottom: 25px;
 }
 
-.filter__capacity {
-    margin-bottom: 60px;
-}
-
+.order__by__list,
 .model__input,
 .brand__input,
 .capacity__inputs,
@@ -140,6 +140,7 @@ input:focus {
     align-items: center;
 }
 
+.order__by__list select,
 .capacity__inputs input,
 .model__input input,
 .brand__input input,
@@ -157,6 +158,7 @@ input:focus {
     -moz-appearance: textfield;
 }
 
+.order__by__list select,
 .model__input input,
 .brand__input input {
     width: 100%;
@@ -164,11 +166,11 @@ input:focus {
 
 .filter__button {
     width: 90%;
-    height: 28px;
+    height: 46px;
     display: flex;
+    margin-top: 18px;
     justify-content: center;
     align-items: center;
-    margin-top: 15px;
 }
 
 .filter__button button {
@@ -363,8 +365,8 @@ input:focus {
 }
 
 .filter__text {
-    margin-bottom: 50px;
+    margin-bottom: 25px;
     font-size: 30px;
     font-weight: 500;
-    color: var(--lightergrey)
+    color: var(--lightergrey);
 }

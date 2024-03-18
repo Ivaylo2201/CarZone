@@ -1,6 +1,6 @@
 <div class="swiper">
     <div class="swiper-wrapper">
-        {% for image in object.images.all %}
+        {% for image in car_images %}
             <div class="swiper-slide">
                 <img src="{{ image.image.url }}" alt=""/>
             </div>

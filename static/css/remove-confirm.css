@@ -19,10 +19,9 @@
 .warning__text {
     width: 100%;
     height: 60%;
-    font-size: 50px;
+    font-size: 40px;
     flex-direction: column;
     color: var(--lightergrey);
-
 }
 
 .primary {

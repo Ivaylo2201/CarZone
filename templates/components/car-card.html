@@ -34,8 +34,12 @@
         <div class="car__category__warranty">
             Category:
             <span class="property">
-                            {% if car.mileage > 0 %}Used{% else %}New{% endif %} 
-                        </span>,
+                {% if car.mileage > 0 %}
+                    Used
+                {% else %}
+                    New
+                {% endif %} 
+            </span>,
             Warranty: <span class="property">{{ car.warranty }} Months</span>
         </div>
         <div class="view__deal__button">

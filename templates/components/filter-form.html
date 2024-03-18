@@ -60,6 +60,14 @@
             </div>
         </div>
 
+        <div class="ordering">
+            {% include 'components/label.html' with text='Order&nbsp;by' %}
+            
+            <div class="order__by__list">
+                {{ form.order_by }}
+            </div>
+        </div>
+
         <div class="filter__button">
             <button type="submit">
                 Apply Filter

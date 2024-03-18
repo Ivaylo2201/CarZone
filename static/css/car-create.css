@@ -50,6 +50,10 @@
     border-color: var(--red);
 }
 
+.features__list li label {
+    cursor: pointer;
+}
+
 .car__create__inputs {
     width: 60%;
     height: 750px;
