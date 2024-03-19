@@ -65,9 +65,11 @@ EURO_STANDARD: tuple = (
 ORDERING: tuple = (
     ('', '-----'),
     ('price', 'Price (Asc)'),
-    ('-price', 'Price (Desc)'),
+    ('price_desc', 'Price (Desc)'),
     ('mileage', 'Mileage (Asc)'),
-    ('-mileage', 'Mileage (Desc)'),
+    ('mileage_desc', 'Mileage (Desc)'),
     ('horsepower', 'Horsepower (Asc)'),
-    ('-horsepower', 'Horsepower (Desc)'),
+    ('horsepower_desc', 'Horsepower (Desc)'),
+    ('manufacture_year', 'Manufacture year (Asc)'),
+    ('manufacture_year_desc', 'Manufacture year (Desc)'),
 )

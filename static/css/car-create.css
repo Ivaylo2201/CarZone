@@ -5,6 +5,7 @@
     background-color: var(--grey);
     border-radius: 8px;
     overflow: hidden;
+    margin-top: 22px;
 }
 
 .container {

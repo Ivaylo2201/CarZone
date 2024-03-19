@@ -1,20 +1,22 @@
-from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, QueryDict
 from django.views.generic import ListView, DetailView, CreateView
-from django.db.models import QuerySet, Q
-from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import QuerySet, Q
+from django.core.paginator import Page
+from django.urls import reverse_lazy
+from django.shortcuts import redirect, render
+
 from urllib.parse import urlencode
 
 from .models import Car, CarImage, Manufacturer
 from .forms import CarFilterForm, CarCreateForm
 
 
-def index(request):
+def index(_):
     return HttpResponse('PLACEHOLDER VIEW! CHANGE IN URLS.PY!')
 
 
-def remove(request, pk: int) -> HttpResponseRedirect:
+def remove(request: HttpRequest, pk: int) -> HttpResponseRedirect:
     car: Car = Car.objects.get(pk=pk)
 
     car.is_available = False
@@ -23,7 +25,7 @@ def remove(request, pk: int) -> HttpResponseRedirect:
     return redirect('user-posts')
 
 
-def car_remove_confirm(request, pk: int) -> HttpResponseRedirect:
+def car_remove_confirm(request: HttpRequest, pk: int) -> HttpResponseRedirect:
     car: Car = Car.objects.get(pk=pk)
 
     context: dict = {
@@ -64,10 +66,23 @@ class CarListView(LoginRequiredMixin, ListView):
 
 
     def get_queryset(self) -> QuerySet:
-        filtered_queryset: QuerySet = self.filter(super().get_queryset())
-        ordering: str = self.request.GET.get('order_by', None)
+        return self.order(self.filter(super().get_queryset()))
 
-        return filtered_queryset.order_by(ordering) if ordering else filtered_queryset
+
+    def get_ordering(self) -> str:
+        raw_ordering: str = self.get_param('order_by')
+
+        if raw_ordering is None:
+            return None
+
+        map_to_orm: dict = {
+            'price_desc': '-price',
+            'mileage_desc': '-mileage',
+            'horsepower_desc': '-horsepower',
+            'manufacture_year_desc': '-manufacture_year'
+        }
+
+        return map_to_orm[raw_ordering] if raw_ordering.endswith('_desc') else raw_ordering
 
 
     def filter(self, queryset: QuerySet) -> QuerySet:
@@ -92,12 +107,18 @@ class CarListView(LoginRequiredMixin, ListView):
         return queryset
 
 
+    def order(self, queryset: QuerySet) -> QuerySet:
+        ordering: str = self.get_ordering()
+
+        return queryset.order_by(ordering) if ordering else queryset
+
+
     def get_param(self, field: str) -> str:
         return self.request.GET.get(field, None)
 
 
-    def get_prev_pages_urls(self, page_obj: object, base_url: str) -> list[str]:
-        page_params = self.request.GET.copy()
+    def get_prev_pages_urls(self, page_obj: Page, base_url: str) -> list:
+        page_params: QueryDict = self.request.GET.copy()
         urls: list = []
 
         page_params['page'] = page_obj.paginator.page_range[0]
@@ -109,8 +130,20 @@ class CarListView(LoginRequiredMixin, ListView):
         return urls
 
 
-    def get_next_pages_urls(self, page_obj: object, base_url: str) -> list[str]:
-        page_params = self.request.GET.copy()
+    def get_next_pages_urls(self, page_obj: Page, base_url: str) -> list:
+
+        """
+            This is needed because the paginator hrefs replace the query params with page=<page>
+
+            1. Copy the already existing params in a dict -> {'brand': 'Audi'}
+            2. Place in the same dict the next/last page -> {'brand': 'Audi', 'page': 2}
+
+            - Urlencode takes a dict and converts it to query params string
+
+            3. Generated url -> localhost:8000/car/catalogue/?brand=Audi&page=2
+        """
+
+        page_params: QueryDict = self.request.GET.copy()
         urls: list = []
 
         page_params['page'] = page_obj.next_page_number()
@@ -128,18 +161,18 @@ class ListUserCarView(LoginRequiredMixin, ListView):
 
 
     def get_queryset(self) -> QuerySet:
-        criteria = Q(dealer=self.request.user) & Q(is_available=True)
+        criteria: Q = Q(dealer=self.request.user) & Q(is_available=True)
+
         return Car.objects.filter(criteria).order_by('pk')
 
 
 class CarCreateView(LoginRequiredMixin, CreateView):
-    model = Car
     template_name = 'car/car-create.html'
     form_class = CarCreateForm
     success_url = reverse_lazy('catalogue')
 
 
-    def form_valid(self, form) -> None:
+    def form_valid(self, form) -> HttpResponse:
         form.instance.dealer = self.request.user
         form.instance.manufacturer = self.get_manufacturer(form.instance.brand.lower())
 
@@ -186,6 +219,7 @@ class CarCreateView(LoginRequiredMixin, CreateView):
 
     @staticmethod
     def add_images(instance: Car, images: list) -> None:
+        print(images)
         images_to_create = [CarImage(image=image, car_id=instance.pk) for image in images]
         CarImage.objects.bulk_create(images_to_create)
 

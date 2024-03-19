@@ -1,11 +1,11 @@
-from django.contrib.auth import login, logout, get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Sum
-from django.http import HttpResponseRedirect, HttpRequest
-from django.shortcuts import redirect
-from django.urls import reverse_lazy, reverse
+from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 from django.views.generic import CreateView, UpdateView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.db.models import Sum, QuerySet
+from django.contrib.auth import login, logout, get_user_model
+from django.urls import reverse_lazy, reverse
+from django.shortcuts import redirect
 
 from .forms import CarZoneUserCreationForm, CarZoneAuthenticationForm, CarZoneUserUpdateForm
 
@@ -23,12 +23,13 @@ class DeactivationConfirmTemplateView(TemplateView):
 class SignUpUserView(CreateView):
     template_name = 'accounts/signup.html'
     form_class = CarZoneUserCreationForm
-    success_url = reverse_lazy('catalogue')
+    success_url = reverse_lazy('profile')
 
 
-    def form_valid(self, form) -> HttpResponseRedirect:
-        result = super().form_valid(form)
+    def form_valid(self, form) -> HttpResponse:
+        result: HttpResponse = super().form_valid(form)
         login(self.request, form.instance)
+
         return result
 
 
@@ -53,12 +54,12 @@ class UpdateUserView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs) -> dict:
         context: dict = super().get_context_data(**kwargs)
-        posts = self.get_object().posts.filter(is_available=True)
+        posts: QuerySet = self.get_object().posts.filter(is_available=True)
 
         statistics: dict = (
             posts.aggregate(
                 total_price=Sum('price'),
-                total_views=Sum('views')
+                total_views=Sum('views'),
             )
         )
 

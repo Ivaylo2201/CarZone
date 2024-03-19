@@ -5,11 +5,7 @@
 {% endblock %}
 
 {% block errors %}
-    {% if form.errors %}
-        {% for field, error in form.errors.items %}
-            {{ error }}
-        {% endfor %}
-    {% endif %}
+    {% include 'components/error-logger.html' %}
 {% endblock %}
 
 {% block fields %}

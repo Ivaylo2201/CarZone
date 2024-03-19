@@ -6,20 +6,20 @@
     <div class="car__model">{{ car.model }}</div>
     <div class="car__posted_on">{{ car.posted_on  | date:"d F Y" }}</div>
     <div class="buttons__edit__delete">
-        <div class="button__edit">
-            <a href="" title="Edit">
+        <div>
+            <a href="" title="Edit car">
                 <i class="fa-solid fa-wrench"></i>
             </a>
         </div>
 
-        <div class="button__remove">
-            <a href="{% url 'car-remove-confirm' pk=car.pk %}" title="Remove">
+        <div>
+            <a href="{% url 'car-remove-confirm' pk=car.pk %}" title="Remove car">
                 <i class="fa-solid fa-trash-can"></i>
             </a>
         </div>
         
-        <div class="button__see__post">
-            <a href="{% url 'car-details' pk=car.pk %}">
+        <div>
+            <a href="{% url 'car-details' pk=car.pk %}" title="View post">
                 <i class="fa-solid fa-car-side"></i>
             </a>
         </div>

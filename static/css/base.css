@@ -20,7 +20,7 @@ body {
 }
 
 .sidebar__container {
-    height: 935px;
+    height: 955px;
     width: 70px;
     position: absolute;
     display: flex;
@@ -40,6 +40,7 @@ body {
     border-radius: 230px;
     background-color: var(--grey);
     left: 0;
+    margin-top: 32px;
 }
 
 .sidebar a:link,
