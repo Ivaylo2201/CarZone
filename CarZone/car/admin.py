@@ -5,7 +5,7 @@ from .models import Car, Manufacturer
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
     list_display = [
-        'brand', 'model', 'manufacture_year', 'transmission_type',
+        'pk', 'brand', 'model', 'manufacture_year', 'transmission_type',
         'horsepower', 'capacity', 'euro_standard', 'mileage',
         'body_type', 'fuel_type', 'color', 'price', 'dealer',
         'warranty', 'is_available', 'posted_on'
@@ -19,7 +19,7 @@ class CarAdmin(admin.ModelAdmin):
 
 @admin.register(Manufacturer)
 class ManufacturerAdmin(admin.ModelAdmin):
-    list_display = ['name', 'country']
+    list_display = ['pk', 'name', 'country']
     list_filter = ['country']
     ordering = ['name']
     search_fields = ['name', 'country']

@@ -2,7 +2,14 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth import get_user_model
 
-from .choices import BODY_TYPES, COLORS, TRANSMISSION_TYPES, FUEL_TYPES, EURO_STANDARD, COUNTRIES
+from .choices import (
+    BODY_TYPES,
+    COLORS,
+    TRANSMISSION_TYPES,
+    FUEL_TYPES,
+    EURO_STANDARD,
+    COUNTRIES,
+)
 from .validators import validate_manufacture_year
 
 UserModel = get_user_model()
@@ -13,9 +20,10 @@ class Manufacturer(models.Model):
     NATIONALITY_MAX_LENGTH: int = 50
 
     name = models.CharField(max_length=NAME_MAX_LENGTH)
-    country = models.CharField(max_length=NATIONALITY_MAX_LENGTH, choices=COUNTRIES, null=True, blank=True)
+    country = models.CharField(
+        max_length=NATIONALITY_MAX_LENGTH, choices=COUNTRIES, null=True, blank=True
+    )
     logo = models.ImageField(upload_to='manufacturers/')
-
 
     def __str__(self) -> str:
         return f'{self.name} ({self.country if self.country else "?"})'
@@ -39,18 +47,14 @@ class Car(models.Model):
     FUEL_TYPE_MAX_LENGTH: int = 15
     COLOR_MAX_LENGTH: int = 15
 
-    brand = models.CharField(
-        max_length=BRAND_MAX_LENGTH
-    )
+    brand = models.CharField(max_length=BRAND_MAX_LENGTH)
 
-    model = models.CharField(
-        max_length=MODEL_MAX_LENGTH
-    )
+    model = models.CharField(max_length=MODEL_MAX_LENGTH)
 
     manufacture_year = models.PositiveSmallIntegerField(
         validators=(
             MinValueValidator(MANUFACTURE_YEAR_MIN_VALUE),
-            validate_manufacture_year
+            validate_manufacture_year,
         )
     )
 
@@ -97,7 +101,7 @@ class Car(models.Model):
     dealer = models.ForeignKey(
         to=UserModel,
         on_delete=models.CASCADE,
-        related_name='posts',
+        related_name="posts",
         null=True,
         blank=True,
     )
@@ -107,24 +111,22 @@ class Car(models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='cars'
+        related_name="cars",
     )
 
     features = models.ManyToManyField(to=Feature)
     warranty = models.PositiveSmallIntegerField()
     is_available = models.BooleanField(default=True, editable=False)
-    posted_on = models.DateField(auto_now_add=True)
-
+    posted_on = models.DateField(auto_now_add=True, editable=False)
 
     def __str__(self) -> str:
         return self.get_brand_model
 
-
     @property
     def get_brand_model(self) -> str:
-        return f'{self.brand} {self.model}'
+        return f"{self.brand} {self.model}"
 
 
 class CarImage(models.Model):
-    car = models.ForeignKey(to=Car, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='cars/')
+    car = models.ForeignKey(to=Car, on_delete=models.CASCADE, related_name="images")
+    image = models.ImageField(upload_to="cars/")

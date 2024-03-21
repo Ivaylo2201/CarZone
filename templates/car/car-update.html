@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extrastyle %}
+  <link rel="stylesheet" href="{% static 'css/car-update.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <form class="form__container" method="post">
+    {% csrf_token %}
+    <div class="header">
+        Currently updating&nbsp;
+        <span class="car">{{ brand }} {{ model }}</span>
+    </div>
+    {% include 'components/car-update-inputs.html' %}
+    {% include 'components/error-logger.html' %}
+</form>
+{% endblock %}

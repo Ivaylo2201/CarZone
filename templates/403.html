@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block extrastyle %}
     <link rel="stylesheet" href="{% static 'css/error.css' %}">
 {% endblock %}
-
 {% block content %}
-	<div class="container">
-        <div class="error">
-            403 Forbidden
-        </div>
-        <div class="help__text">
-            The server has rejected your request.
-        </div>
-	</div>
+    <div class="container">
+        <div class="error">403 Forbidden</div>
+        <div class="help__text">The server has rejected your request.</div>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+            </ul>
+        {% endif %}
+    </div>
 {% endblock %}

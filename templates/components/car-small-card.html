@@ -7,7 +7,7 @@
     <div class="car__posted_on">{{ car.posted_on  | date:"d F Y" }}</div>
     <div class="buttons__edit__delete">
         <div>
-            <a href="" title="Edit car">
+            <a href="{% url "car-update" pk=car.pk %}" title="Edit car">
                 <i class="fa-solid fa-wrench"></i>
             </a>
         </div>

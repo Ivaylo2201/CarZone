@@ -13,7 +13,6 @@ class MultipleFileField(forms.FileField):
         kwargs.setdefault("widget", MultipleFileInput())
         super().__init__(*args, **kwargs)
 
-
     def clean(self, data, initial=None):
         single_file_clean = super().clean
         if isinstance(data, (list, tuple)):
@@ -26,28 +25,41 @@ class MultipleFileField(forms.FileField):
 class CarCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CarCreateForm, self).__init__(*args, **kwargs)
-        self.fields['features'] = forms.ModelMultipleChoiceField(
+        self.fields["features"] = forms.ModelMultipleChoiceField(
             queryset=Feature.objects.all(),
             widget=forms.CheckboxSelectMultiple(),
-            required=False
+            required=False,
         )
-        self.fields['images'] = MultipleFileField()
+        self.fields["images"] = MultipleFileField()
 
     class Meta:
         model = Car
-        exclude = ('views', 'dealer', 'manufacturer', 'features')
+        exclude = ("views", "dealer", "manufacturer", "features")
 
         error_messages = {
-            'horsepower': {
-                'max_value': 'Ensure horsepower does not exceed 750!',
+            "horsepower": {
+                "max_value": "Ensure horsepower does not exceed 750!",
             },
-            'capacity': {
-                'max_value': 'Ensure capacity does not exceed 7500!',
+            "capacity": {
+                "max_value": "Ensure capacity does not exceed 7500!",
             },
-            'mileage': {
-                'max_value': 'Ensure mileage does not exceed 750 000!',
-            }
+            "mileage": {
+                "max_value": "Ensure mileage does not exceed 750 000!",
+            },
         }
+
+
+class CarUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Car
+        exclude = (
+            "dealer",
+            "views",
+            "manufacturer",
+            "features",
+            "is_available",
+            "posted_on",
+        )
 
 
 class CarFilterForm(forms.Form):
