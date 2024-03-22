@@ -52,7 +52,10 @@
 }
 
 .features__list li label {
+    width: 150px;
+    height: 20px;
     cursor: pointer;
+    font-size: 15px;
 }
 
 .car__create__inputs {

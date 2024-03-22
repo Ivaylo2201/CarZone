@@ -1,5 +1,5 @@
-.buttons__edit__delete div,
-.buttons__edit__delete a,
+.buttons div,
+.buttons a,
 .car__posted_on,
 .car__model,
 .car__brand,
@@ -44,14 +44,13 @@
 
 .cars__container {
     width: 75%;
-    height: 88%;
+    height: 87%;
     background-color: var(--grey);
     border-radius: 8px;
     font-family: "Montserrat", sans-serif;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
     margin-top: 22px;
+    padding: 20px;
 }
 
 .no__posts {
@@ -120,12 +119,12 @@
 .car__brand {
     font-size: 32px;
     font-weight: 700;
-    height: 54px;
+    height: 56px;
 }
 
 .car__model {
     font-size: 16px;
-    height: 18px;
+    height: 22px;
     margin-bottom: 5px;
 }
 
@@ -139,15 +138,15 @@
     margin-bottom: 10px;
 }
 
-.buttons__edit__delete {
+.buttons {
     width: 75%;
-    height: 75px;
+    height: 67px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
-.buttons__edit__delete a {
+.buttons a {
     width: 50px;
     height: 50px;
     text-decoration: none;
@@ -156,18 +155,18 @@
     transition: background-color 0.28s;
 }
 
-.buttons__edit__delete a:link,
-.buttons__edit__delete a:visited,
-.buttons__edit__delete a:active {
+.buttons a:link,
+.buttons a:visited,
+.buttons a:active {
     color: var(--lightergrey);
 }
 
-.buttons__edit__delete a:hover {
+.buttons a:hover {
     background-color: var(--lightergrey);
     color: var(--red);
 }
 
-.buttons__edit__delete div {
+.buttons div {
     width: 55px;
     height: 55px;
     font-size: 20px;

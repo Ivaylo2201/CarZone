@@ -13,7 +13,9 @@ UserModel = get_user_model()
 
 
 def initial(request: HttpRequest) -> HttpResponseRedirect:
-    return logout_then_login(request)
+    if request.user:
+        return redirect('catalogue')
+    return redirect('login')
 
 
 class DeactivationConfirmTemplateView(TemplateView):

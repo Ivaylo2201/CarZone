@@ -5,7 +5,7 @@
     <div class="car__brand">{{ car.brand }}</div>
     <div class="car__model">{{ car.model }}</div>
     <div class="car__posted_on">{{ car.posted_on  | date:"d F Y" }}</div>
-    <div class="buttons__edit__delete">
+    <div class="buttons">
         <div>
             <a href="{% url "car-update" pk=car.pk %}" title="Edit car">
                 <i class="fa-solid fa-wrench"></i>

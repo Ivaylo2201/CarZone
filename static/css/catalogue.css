@@ -167,6 +167,10 @@ input:focus {
     width: 100%;
 }
 
+.order__by__list select:hover {
+    cursor: pointer;
+}
+
 .filter__button {
     width: 90%;
     height: 46px;

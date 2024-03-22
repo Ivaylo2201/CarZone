@@ -101,7 +101,7 @@ class Car(models.Model):
     dealer = models.ForeignKey(
         to=UserModel,
         on_delete=models.CASCADE,
-        related_name="posts",
+        related_name='posts',
         null=True,
         blank=True,
     )
@@ -111,7 +111,7 @@ class Car(models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name="cars",
+        related_name='cars',
     )
 
     features = models.ManyToManyField(to=Feature)
@@ -124,9 +124,9 @@ class Car(models.Model):
 
     @property
     def get_brand_model(self) -> str:
-        return f"{self.brand} {self.model}"
+        return f'{self.brand} {self.model}'
 
 
 class CarImage(models.Model):
-    car = models.ForeignKey(to=Car, on_delete=models.CASCADE, related_name="images")
-    image = models.ImageField(upload_to="cars/")
+    car = models.ForeignKey(to=Car, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='cars/')
