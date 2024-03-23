@@ -11,6 +11,7 @@ from .choices import (
     COUNTRIES,
 )
 from .validators import validate_manufacture_year
+from .helpers import get_manufacturer
 
 UserModel = get_user_model()
 
@@ -33,6 +34,9 @@ class Feature(models.Model):
     NAME_MAX_LENGTH: int = 25
 
     name = models.CharField(max_length=NAME_MAX_LENGTH)
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class Car(models.Model):
@@ -119,8 +123,20 @@ class Car(models.Model):
     is_available = models.BooleanField(default=True, editable=False)
     posted_on = models.DateField(auto_now_add=True, editable=False)
 
+    def save(self, *args, **kwargs):
+        try:
+            self.manufacturer = (
+                Manufacturer.objects.get(name__iexact=get_manufacturer(self.brand.lower()))
+            )
+        except Manufacturer.DoesNotExist:
+            ...
+
+        super().save(*args, **kwargs)
+
+
     def __str__(self) -> str:
         return self.get_brand_model
+    
 
     @property
     def get_brand_model(self) -> str:

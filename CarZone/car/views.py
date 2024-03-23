@@ -9,8 +9,9 @@ from django.shortcuts import redirect, render
 from urllib.parse import urlencode
 
 from .forms import CarFilterForm, CarCreateForm, CarUpdateForm
-from .mixins import AvailabilityRequiredMixin, OwnershipRequiredMixin, ManufacturerMixin
-from .models import Car, CarImage
+from .mixins import AvailabilityRequiredMixin, OwnershipRequiredMixin
+from .models import Car, CarImage, Manufacturer
+from .helpers import get_manufacturer
 
 
 def index(_):
@@ -173,7 +174,7 @@ class ListUserCarView(LoginRequiredMixin, ListView):
         return Car.objects.filter(criteria).order_by('pk')
 
 
-class CarCreateView(LoginRequiredMixin, ManufacturerMixin, CreateView):
+class CarCreateView(LoginRequiredMixin, CreateView):
     template_name = 'car/car-create.html'
     form_class = CarCreateForm
     success_url = reverse_lazy('catalogue')
@@ -229,7 +230,7 @@ class CarDetailView(AvailabilityRequiredMixin, LoginRequiredMixin, DetailView):
         return context
 
 
-class CarUpdateView(OwnershipRequiredMixin, LoginRequiredMixin, ManufacturerMixin, UpdateView):
+class CarUpdateView(OwnershipRequiredMixin, LoginRequiredMixin, UpdateView):
     queryset = Car.objects.all()
     form_class = CarUpdateForm
     template_name = 'car/car-update.html'
@@ -244,9 +245,13 @@ class CarUpdateView(OwnershipRequiredMixin, LoginRequiredMixin, ManufacturerMixi
 
 
     def form_valid(self, form):
-        self.object.manufacturer = self.get_manufacturer(
-            self.object.brand.lower())
-
+        try:
+            self.object.manufacturer = (
+                Manufacturer.objects.get(name__iexact=get_manufacturer(self.object.brand.lower()))
+            )
+        except Manufacturer.DoesNotExist:
+            ...
+        
         return super().form_valid(form)
 
 

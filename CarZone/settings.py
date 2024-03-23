@@ -36,8 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    "CarZone.car.apps.CarConfig",
-    "CarZone.accounts.apps.AccountsConfig"
+    'CarZone.car.apps.CarConfig',
+    'CarZone.accounts.apps.AccountsConfig',
+    'CarZone.api.apps.ApiConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
