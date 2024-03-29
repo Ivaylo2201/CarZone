@@ -35,8 +35,14 @@
             <img src="{% static 'images/default_profile_picture.png' %}" alt="">
         {% endif %}
     </div>
-    <div class="dealer__name">
-        {{ object.dealer.first_name }} {{ object.dealer.last_name }}
+    <div class="dealer__name__location">
+        <div class="dealer__name">
+            {{ object.dealer.first_name }} {{ object.dealer.last_name }}
+        </div>
+        <div class="dealer__location">
+            <i class="fa-solid fa-location-dot"></i>
+            {{ object.dealer.location }}
+        </div>
     </div>
 </div>
 <div class="car__dealer__phone__number">

@@ -2,6 +2,7 @@ def get_manufacturer(brand: str) -> str | None:
     manufacturers: dict = {
         'audi': 'Volkswagen',
         'vw': 'Volkswagen',
+        'volkswagen': 'Volkswagen',
         'seat': 'Volkswagen',
         'lamborghini': 'Volkswagen',
         'porsche': 'Volkswagen',
@@ -18,10 +19,11 @@ def get_manufacturer(brand: str) -> str | None:
         'peugeot': 'Peugeot',
         'citroen': 'Citroen',
         'maserati': 'Maserati',
-        'ferrari': 'Ferrari'
+        'ferrari': 'Ferrari',
+        'honda': 'Honda'
     }
 
     try:
         return manufacturers[brand]
-    except (KeyError):
+    except KeyError:
         return None

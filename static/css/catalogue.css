@@ -51,7 +51,7 @@
 .secondary__text {
     font-size: 28px;
     font-weight: 800;
-     color: var(--red);
+    color: var(--red);
 }
 
 .secondary__text,
@@ -352,6 +352,15 @@ input:focus {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.active {
+    transition: background-color 0.15s;
+}
+
+.active:hover {
+    background-color: var(--red);
+    color: var(--lightergrey);
 }
 
 .current {

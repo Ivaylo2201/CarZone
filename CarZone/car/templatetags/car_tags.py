@@ -6,7 +6,7 @@ register = template.Library()
 
 
 @register.filter
-def separate_thousands(value) -> str:
+def separate_thousands(value: int) -> str:
     return "{:,}".format(value).replace(',', ' ')
 
 

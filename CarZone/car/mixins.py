@@ -1,8 +1,6 @@
 from django.contrib.auth.mixins import AccessMixin
 from django.http import HttpResponseRedirect, HttpRequest, HttpResponse
 
-from .models import Manufacturer
-
 
 class AvailabilityRequiredMixin(AccessMixin):
     def dispatch(self, request, *args, **kwargs) -> HttpResponseRedirect:

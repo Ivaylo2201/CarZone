@@ -14,9 +14,6 @@ from .models import Car, CarImage, Manufacturer
 from .helpers import get_manufacturer
 
 
-def index(_):
-    return HttpResponse('PLACEHOLDER VIEW! CHANGE IN URLS.PY!')
-
 
 def remove(_, pk: int) -> HttpResponseRedirect:
     car: Car = Car.objects.get(pk=pk)
@@ -44,7 +41,6 @@ class CarListView(LoginRequiredMixin, ListView):
     template_name = 'car/catalogue.html'
     paginate_by = 3
 
-
     def get_context_data(self, *args, **kwargs) -> dict:
         context: dict = super().get_context_data(*args, **kwargs)
 
@@ -67,10 +63,8 @@ class CarListView(LoginRequiredMixin, ListView):
 
         return context
 
-
     def get_queryset(self) -> QuerySet:
         return self.order(self.filter(super().get_queryset()))
-
 
     def get_ordering(self) -> str | None:
         raw_ordering: str = self.get_param('order_by')
@@ -86,7 +80,6 @@ class CarListView(LoginRequiredMixin, ListView):
         }
 
         return map_to_orm[raw_ordering] if raw_ordering.endswith('_desc') else raw_ordering
-
 
     def filter(self, queryset: QuerySet) -> QuerySet:
         lookups: list = [
@@ -115,16 +108,13 @@ class CarListView(LoginRequiredMixin, ListView):
 
         return queryset
 
-
     def order(self, queryset: QuerySet) -> QuerySet:
         ordering: str = self.get_ordering()
 
         return queryset.order_by(ordering) if ordering else queryset
 
-
     def get_param(self, field: str) -> str:
         return self.request.GET.get(field, None)
-
 
     def get_prev_pages_urls(self, page_obj: Page, base_url: str) -> list:
         page_params: QueryDict = self.request.GET.copy()
@@ -137,7 +127,6 @@ class CarListView(LoginRequiredMixin, ListView):
         urls.append(f'{base_url}?{urlencode(page_params)}')
 
         return urls
-
 
     def get_next_pages_urls(self, page_obj: Page, base_url: str) -> list:
         '''
@@ -167,7 +156,6 @@ class ListUserCarView(LoginRequiredMixin, ListView):
     template_name = 'accounts/your-posts.html'
     paginate_by = 6
 
-
     def get_queryset(self) -> QuerySet:
         criteria: Q = Q(dealer=self.request.user) & Q(is_available=True)
 
@@ -179,11 +167,16 @@ class CarCreateView(LoginRequiredMixin, CreateView):
     form_class = CarCreateForm
     success_url = reverse_lazy('catalogue')
 
-
     def form_valid(self, form) -> HttpResponse:
         form.instance.dealer = self.request.user
-        form.instance.manufacturer = self.get_manufacturer(
-            form.instance.brand.lower())
+
+        try:
+            form.instance.manufacturer = (
+                Manufacturer.objects.get(
+                    name=get_manufacturer(form.instance.brand.lower()))
+            )
+        except Manufacturer.DoesNotExist:
+            form.instance.manufacturer = None
 
         form.instance.save()
 
@@ -192,11 +185,9 @@ class CarCreateView(LoginRequiredMixin, CreateView):
 
         return super().form_valid(form)
 
-
     @staticmethod
     def add_features(instance: Car, features: list) -> None:
         instance.features.add(*features)
-
 
     @staticmethod
     def add_images(instance: Car, images: list) -> None:
@@ -210,7 +201,6 @@ class CarDetailView(AvailabilityRequiredMixin, LoginRequiredMixin, DetailView):
     queryset = Car.objects.all()
     template_name = 'car/car-details.html'
 
-
     def get(self, request, *args, **kwargs) -> HttpResponse:
         car: Car = self.get_object()
 
@@ -218,7 +208,6 @@ class CarDetailView(AvailabilityRequiredMixin, LoginRequiredMixin, DetailView):
         car.save()
 
         return super().get(request, *args, **kwargs)
-
 
     def get_context_data(self, **kwargs) -> dict:
         context: dict = super().get_context_data(**kwargs)
@@ -235,25 +224,22 @@ class CarUpdateView(OwnershipRequiredMixin, LoginRequiredMixin, UpdateView):
     form_class = CarUpdateForm
     template_name = 'car/car-update.html'
 
-
     def get_initial(self) -> dict:
         return self.get_object().__dict__
-
 
     def get_success_url(self) -> str:
         return reverse('car-details', kwargs={'pk': self.get_object().pk})
 
-
     def form_valid(self, form):
         try:
             self.object.manufacturer = (
-                Manufacturer.objects.get(name__iexact=get_manufacturer(self.object.brand.lower()))
+                Manufacturer.objects.get(
+                    name__iexact=get_manufacturer(self.object.brand.lower()))
             )
         except Manufacturer.DoesNotExist:
-            ...
-        
-        return super().form_valid(form)
+            self.object.manufacturer = None
 
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs) -> dict:
         context: dict = super().get_context_data(**kwargs)

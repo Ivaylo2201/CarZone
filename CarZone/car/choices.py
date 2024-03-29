@@ -43,17 +43,17 @@ FUEL_TYPES: tuple = (
 
 COLORS: tuple = (
     ('', '-----'),
-    ('White', 'White'),
-    ('Grey', 'Grey'),
     ('Black', 'Black'),
-    ('Red', 'Red'),
     ('Blue', 'Blue'),
-    ('Yellow', 'Yellow'),
-    ('Orange', 'Orange'),
+    ('Brown', 'Brown'),
     ('Green', 'Green'),
+    ('Grey', 'Grey'),
+    ('Orange', 'Orange'),
     ('Pink', 'Pink'),
     ('Purple', 'Purple'),
-    ('Brown', 'Brown')
+    ('Red', 'Red'),
+    ('White', 'White'),
+    ('Yellow', 'Yellow')
 )
 
 EURO_STANDARD: tuple = (
