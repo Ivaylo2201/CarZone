@@ -16,12 +16,6 @@ Login form
 Profile
 ![profile](https://github.com/Ivaylo2201/CarZone/assets/120925473/b7ca0911-543a-44a7-956a-99b982770447)
 
-Filtered catalogue
-![filtered_catalogue](https://github.com/Ivaylo2201/CarZone/assets/120925473/b68521a5-858c-4b13-9564-72fd12329f14)
-
-No cars catalogue
-![no_cars_catalogue](https://github.com/Ivaylo2201/CarZone/assets/120925473/33689c75-5e44-4441-8a40-ab613cdf907b)
-
 Add car form
 ![add_car_form](https://github.com/Ivaylo2201/CarZone/assets/120925473/05f563e8-19c7-48e7-bd28-07ed07d2677b)
 
